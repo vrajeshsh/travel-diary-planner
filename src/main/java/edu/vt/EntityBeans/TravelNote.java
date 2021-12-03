@@ -21,7 +21,7 @@ representing the UserPhoto table in the CloudDriveDB database.
     private User userId;    --> userId is the object reference of the User object.
     userId.id               --> User object's database primary key
      */
-        @NamedQuery(name = "TravelNote.findTravelNotesByUserDatabasePrimaryKey", query = "SELECT n FROM TravelNote n WHERE n.userId = :primaryKey")
+        @NamedQuery(name = "TravelNote.findTravelNotesByUserDatabasePrimaryKey", query = "SELECT n FROM TravelNote n WHERE n.userId = :userId")
         , @NamedQuery(name = "TravelNote.findById", query = "SELECT n FROM TravelNote n WHERE n.id = :id")
 })
 public class TravelNote implements Serializable {
