@@ -1,7 +1,3 @@
-/*
- * Created by Osman Balci on 2021.7.20
- * Copyright © 2021 Osman Balci. All rights reserved.
- */
 package edu.vt.managers;
 
 import edu.vt.globals.Password;

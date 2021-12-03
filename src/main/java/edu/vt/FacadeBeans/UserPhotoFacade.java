@@ -1,7 +1,4 @@
-/*
- * Created by Osman Balci on 2021.7.14
- * Copyright © 2021 Osman Balci. All rights reserved.
- */
+
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.UserPhoto;
