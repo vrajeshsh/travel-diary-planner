@@ -18,7 +18,7 @@
         (c) displays a title for the page in search-engine results.
         -->
         <title>
-            <ui:insert name="title">Cloud Drive</ui:insert>
+            <ui:insert name="title">Travel Diary Planner</ui:insert>
         </title>
 
         <!-- 
@@ -69,6 +69,27 @@
         -->
         <link rel="shortcut icon" href="#{resource['images:favicon.ico']}" type="image/x-icon" />
 
+        <!--
+        **********************************
+        *   Google Maps JavaScript API   *
+        **********************************
+        STEP 1: Obtain your API key for Google Maps JavaScript API at
+                https://developers.google.com/maps/documentation/javascript/get-api-key
+
+        STEP 2: Create a project and set its properties
+        STEP 3: Sign in to the Google API Console at https://console.developers.google.com/
+        STEP 4: Click 'Credentials' in the left menu and then click your API key name.
+                You can restrict the use of your API key to certain domain names.
+        STEP 6: Click 'Library' in the left menu. Under the Google Maps APIs, click
+                the following to enable these features:
+
+        <> Google Maps Embed API and then click Enable to enable it.
+        <> Google Static Maps API and then click Enable to enable it.
+        -->
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
+
+<!--        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBztt9J2EE3Js0OKoeA6k8E8Zpj82CYV4"-->
+<!--                type="text/javascript"></script>-->
     </h:head>
 
     <h:body>  

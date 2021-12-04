@@ -249,4 +249,5 @@ public class TravelNoteController implements Serializable {
     public void clearListOfUserTravelNotes() {
         listOfTravelNotes = null;
     }
+
 }

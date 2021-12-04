@@ -2,9 +2,12 @@ package edu.vt.EntityBeans;
 import edu.vt.EntityBeans.User;
 import edu.vt.FacadeBeans.AbstractFacade;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -162,5 +165,15 @@ public class TravelNote implements Serializable {
   @Override
   public String toString() {
     return id.toString();
+  }
+
+  public String getLatLong() {
+      return Float.toString(lat) + ", "+Float.toString(lng);
+  }
+
+  public String getGoogleMapsLink() throws IOException {
+    return "http://maps.google.com/maps?q="+Float.toString(lat) + ","+ Float.toString(lng);
+//    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//    externalContext.redirect("https://stackoverflow.com");
   }
 }
