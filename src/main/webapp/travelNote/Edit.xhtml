@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Arpit Thool on 2021.11.16
+  - Copyright © 2021 Arpit Thool. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition>
+    <!--
+    =================================================================
+    |  Clicking the EDIT button in List.xhtml displays this Dialog  |
+    |  window for the user to update the selected PublicVideo's data.   |
+    =================================================================
+    -->
+    <p:dialog id="TravelNoteEditDlg" header="Edit Travel Note" widgetVar="TravelNoteEditDialog"
+              modal="true" position="center" appendTo="@(body)"
+              showEffect="slide" hideEffect="fade" responsive="true" >
+        <!--
+        Various effect options can be used when showing and closing the dialog.
+        Use showEffect and hideEffect options to apply these effects:
+            blind, bounce, clip, drop, explode, fade, fold, highlight, puff,
+            pulsate, scale, shake, size, slide and transfer. [PrimeFaces Documentation]
+        -->
+
+        <!-- class="ui-datatable-data" in siteStyles reduces row paddings -->
+        <h:form id="TravelNoteEditForm" class="ui-datatable-data">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                             rendered="#{travelNoteController.selected != null}">
+                    <p:outputLabel value="text:" for="text" />
+                    <p:inputText id="text" value="#{travelNoteController.selected.text}" style="width:300px"
+                                 required="true" />
+
+                    <p:outputLabel value="lat:" for="lat" />
+                    <p:inputText id="lat" value="#{travelNoteController.selected.lat}" style="width:300px"
+                                 required="true" />
+
+                    <p:outputLabel value="lng:" for="lng" />
+                    <p:inputText id="lng" value="#{travelNoteController.selected.lng}" style="width:300px"
+                                 required="true" />
+
+                    <p:outputLabel value="Date Created:" for="dateCreated" />
+                    <p:datePicker id="dateCreated" value="#{travelNoteController.selected.dateCreated}" pattern="yyyy/MM/dd"
+                                  required="true" />
+                </p:panelGrid>
+
+            </h:panelGroup>
+            <br />
+            <h:panelGroup>
+                <div align="center">
+                    <!-- SAVE button -->
+                    <p:commandButton value="Save" icon="fas fa-save" styleClass="rounded-button"
+                                     ajax="false" actionListener="#{travelNoteController.update()}"
+                                     update="display,:TravelNoteListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                     oncomplete="handleSubmit(args, 'TravelNoteEditDialog');"/>
+                    &nbsp;
+                    <!-- CANCEL button -->
+                    <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                     immediate="true" onclick="PF('TravelNoteEditDialog').hide()" />
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</html>

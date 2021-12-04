@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  - Created by Osman Balci on 2021.7.15
-  - Copyright © 2021 Osman Balci. All rights reserved.
-  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <!--
 *********************************************
@@ -66,6 +64,10 @@ siteTemplate for the entire site, achieving great maintainability.
                             <!-- Menu Options IF a User is Signed In -->
                             <c:if test="#{userController.isLoggedIn() == true}">
                                 <p:menuitem value="My Files" outcome="/userFile/ListUserFiles" icon="fas fa-list" />
+
+                                <p:menuitem value="My Travel Notes" outcome="/travelNote/ListUserTravelNotes" icon="fas fa-list" >
+                                    <f:actionListener binding="#{travelNoteController.clearListOfUserTravelNotes()}"/>
+                                </p:menuitem>
 
                                 <p:menuitem outcome="/userAccount/Profile">
                                     <p:graphicImage cache="false" styleClass="smallProfilePhoto" value="#{userController.userPhoto()}" />

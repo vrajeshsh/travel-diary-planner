@@ -3,7 +3,7 @@
 Tables to be dropped must be listed in a logical order based on dependency.
 UserFile and UserPhoto depend on User. Therefore, they must be dropped before User.
 */
-DROP TABLE IF EXISTS UserFile, UserPhoto, User;
+DROP TABLE IF EXISTS TravelNote, UserFile, UserPhoto, User;
 
 /* The User table contains attributes of interest of a User. */
 CREATE TABLE User
@@ -41,4 +41,15 @@ CREATE TABLE UserFile
        filename VARCHAR(256) NOT NULL,
        user_id INT UNSIGNED,
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+CREATE TABLE TravelNote
+(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    text VARCHAR(10000) NOT NULL,
+    user_id INT UNSIGNED,
+    date_created DATE NOT NULL,
+    lat FLOAT( 10, 8 ) NOT NULL,
+    lng FLOAT( 10, 8 ) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
