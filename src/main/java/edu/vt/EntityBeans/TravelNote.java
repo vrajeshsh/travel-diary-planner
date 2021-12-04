@@ -37,8 +37,8 @@ public class TravelNote implements Serializable {
 
   @Basic(optional = false)
   @NotNull(message = "Text is required!")
-  @Size(min = 1, max = 5)
   @Column(name = "text")
+  @Size(min = 1, max = 10000)
   private String text;
 
   @JoinColumn(name = "user_id", referencedColumnName = "id")

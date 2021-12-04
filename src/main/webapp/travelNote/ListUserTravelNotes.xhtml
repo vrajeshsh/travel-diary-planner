@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <!-- This page is constructed based on the siteTemplate -->
 <ui:composition template="/template/siteTemplate.xhtml">
@@ -16,6 +17,14 @@
 
     <!-- Create the content for this page below -->
     <ui:define name="editableContent">
+
+        <c:if test="#{facesContext.validationFailed}">
+            ${travelNoteController.unselect()}
+        </c:if>
+
+        <f:metadata>
+            <f:viewAction action="#{travelNoteController.unselect()}" rendered="#{facesContext.postback}" />
+        </f:metadata>
 
         <div align="center">
             <h:form id="TravelNoteListForm">
@@ -36,18 +45,35 @@
                                  rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect" update="createButton">
+                        <p:ajax event="rowSelect" update="createButton editButton">
 <!--                            uploadButton downloadButton deleteButton displayButton playButton-->
                         </p:ajax>
-                        <p:ajax event="rowUnselect" update="createButton"/>
+                        <p:ajax event="rowUnselect" update="createButton editButton"/>
 <!--                        uploadButton downloadButton deleteButton displayButton playButton-->
 
+                        <!--
+                        *************************
+                        *   Data Table Header   *
+                        *************************
+                        -->
+                        <f:facet name="header">
+                            <div align="center">
+                                <p:inputText id="globalFilter" onkeyup="PF('travelNotesDataTable').filter()" filterMatchMode="contains"
+                                             style="width: 250px"
+                                             placeholder="Enter Global Search Query" />
+                                &nbsp;
+                                <p:commandButton type="button" value="Clear All Filters" styleClass="ui-button-outlined"
+                                                 icon="fas fa-undo" onclick="PF('travelNotesDataTable').clearFilters()" />
+                            </div>
+                        </f:facet>
                         <!--
                         ********************************
                         *        Travel Note ID column        *
                         ********************************
                         -->
-                        <p:column sortBy="#{aTravelNote.id}" headerText="Travel Note Id" style="width:80px;">
+                        <p:column sortBy="#{aTravelNote.id}"
+                                  filterBy="#{aTravelNote.id}" filterMatchMode="contains"
+                                  headerText="Travel Note Id" style="width:80px;">
                             <div align="center"><h:outputText value="#{aTravelNote.id}"/></div>
                         </p:column>
 
@@ -56,7 +82,9 @@
                         *        Travel Note text column      *
                         ********************************
                         -->
-                        <p:column sortBy="#{aTravelNote.text}" headerText="text" >
+                        <p:column sortBy="#{aTravelNote.text}"
+                                  filterBy="#{aTravelNote.text}" filterMatchMode="contains"
+                                  headerText="text" >
                             <h:outputText value="#{aTravelNote.text}"/>
                         </p:column>
 
@@ -70,6 +98,7 @@
                                   style="vertical-align: top; width: 100px;">
                             <h:outputText value="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}"/>
                         </p:column>
+
                         <f:facet name="footer">
                             <div align="center">
                                 <!-- CREATE button: id is used since it is referenced to be activated or deactivated -->
@@ -81,11 +110,11 @@
 <!--                                <p:commandButton id="viewButton" value="View" icon="fas fa-eye" styleClass="rounded-button"-->
 <!--                                                 update=":TravelNoteViewDlg" oncomplete="PF('TravelNoteViewDialog').show()"-->
 <!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
-<!--                                &nbsp;-->
-                                <!-- EDIT button: id is used since it is referenced to be activated or deactivated -->
-<!--                                <p:commandButton id="editButton" value="Edit" icon="fas fa-edit" styleClass="rounded-button"-->
-<!--                                                 update=":TravelNoteEditDlg" oncomplete="PF('TravelNoteEditDialog').show()"-->
-<!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
+                                &nbsp;
+                                <!-- EDIT button: id is used since it is referenced to be activated or deactivated-->
+                                <p:commandButton id="editButton" value="Edit" icon="fas fa-edit" styleClass="rounded-button"
+                                                 update=":TravelNoteEditDlg" oncomplete="PF('TravelNoteEditDialog').show()"
+                                                 disabled="#{empty travelNoteController.selected}"/>
 
                                 &nbsp;
                                 <!-- ***************************************************
@@ -229,6 +258,12 @@
         Create.xhtml file in a dialog window on top of this page.
         -->
         <ui:include src="/travelNote/Create.xhtml"/>
+
+        <!--
+        Clicking the Edit button displays the included
+        Edit.xhtml file in a dialog window on top of this page.
+        -->
+        <ui:include src="/travelNote/Edit.xhtml"/>
 
     </ui:define>
 </ui:composition>

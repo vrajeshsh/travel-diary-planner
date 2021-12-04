@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.event.ActionListener;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -121,6 +122,9 @@ public class TravelNoteController implements Serializable {
      */
     private void persist(JsfUtil.PersistAction persistAction, String successMessage) {
         if (selected != null) {
+            Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            User signedInUser = (User) sessionMap.get("user");
+            selected.setUserId(signedInUser);
             try {
                 if (persistAction != JsfUtil.PersistAction.DELETE) {
                     /*
@@ -242,4 +246,7 @@ public class TravelNoteController implements Serializable {
         selected = new TravelNote();
     }
 
+    public void clearListOfUserTravelNotes() {
+        listOfTravelNotes = null;
+    }
 }
