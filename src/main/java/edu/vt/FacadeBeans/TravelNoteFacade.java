@@ -1,6 +1,8 @@
 package edu.vt.FacadeBeans;
 
 import edu.vt.EntityBeans.TravelNote;
+import edu.vt.EntityBeans.User;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,7 +50,7 @@ public class TravelNoteFacade extends AbstractFacade<TravelNote> {
 
     // Returns a list of object references of UserFile objects that belong to
     // the User object whose database Primary Key = primaryKey
-    public List<TravelNote> findTravelNotesByUserPrimaryKey(Integer primaryKey) {
+    public List<TravelNote> findTravelNotesByUserPrimaryKey(User signedInUser) {
         /*
         The following @NamedQuery definition is given in UserFile entity class file:
         @NamedQuery(name = "UserFile.findUserFilesByUserId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId")
@@ -56,7 +58,7 @@ public class TravelNoteFacade extends AbstractFacade<TravelNote> {
         The following statement obtains the results from the named database query.
          */
         return entityManager.createNamedQuery("TravelNote.findTravelNotesByUserDatabasePrimaryKey")
-                .setParameter("userId", primaryKey)
+                .setParameter("userId", signedInUser)
                 .getResultList();
     }
 }

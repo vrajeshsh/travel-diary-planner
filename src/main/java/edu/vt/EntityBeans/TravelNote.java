@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 /*
 The @Entity annotation designates this class as a JPA Entity POJO class
@@ -35,7 +36,7 @@ public class TravelNote implements Serializable {
   private Integer id;
 
   @Basic(optional = false)
-  @NotNull
+  @NotNull(message = "Text is required!")
   @Size(min = 1, max = 5)
   @Column(name = "text")
   private String text;
@@ -43,6 +44,21 @@ public class TravelNote implements Serializable {
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   @ManyToOne
   private User userId;
+
+  @Basic(optional = false)
+  @NotNull(message = "Video publication date is required!")
+  @Column(name = "date_created")
+  private Date dateCreated;
+
+  @Basic(optional = false)
+  @NotNull(message = "Latitude is required!")
+  @Column(name = "lat")
+  private float lat;
+
+  @Basic(optional = false)
+  @NotNull(message = "Longitude is required!")
+  @Column(name = "lng")
+  private float lng;
 
 
   /*
@@ -88,6 +104,30 @@ public class TravelNote implements Serializable {
 
   public void setUserId(User userId) {
     this.userId = userId;
+  }
+
+  public Date getDateCreated() {
+    return dateCreated;
+  }
+
+  public void setDateCreated(Date dateCreated) {
+    this.dateCreated = dateCreated;
+  }
+
+  public float getLat() {
+    return lat;
+  }
+
+  public void setLat(float lat) {
+    this.lat = lat;
+  }
+
+  public float getLng() {
+    return lng;
+  }
+
+  public void setLng(float lng) {
+    this.lng = lng;
   }
 
   /*

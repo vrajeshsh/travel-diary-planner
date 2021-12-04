@@ -36,15 +36,15 @@
                                  rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect" update="">
+                        <p:ajax event="rowSelect" update="createButton">
 <!--                            uploadButton downloadButton deleteButton displayButton playButton-->
                         </p:ajax>
-                        <p:ajax event="rowUnselect" update=""/>
+                        <p:ajax event="rowUnselect" update="createButton"/>
 <!--                        uploadButton downloadButton deleteButton displayButton playButton-->
 
                         <!--
                         ********************************
-                        *        FILE ID column        *
+                        *        Travel Note ID column        *
                         ********************************
                         -->
                         <p:column sortBy="#{aTravelNote.id}" headerText="Travel Note Id" style="width:80px;">
@@ -53,23 +53,97 @@
 
                         <!--
                         ********************************
-                        *        FILE NAME column      *
+                        *        Travel Note text column      *
                         ********************************
                         -->
-                        <p:column sortBy="#{aTravelNote.text}" headerText="File Name" >
-                            <h:outputText value="#{travelNoteController.text}"/>
+                        <p:column sortBy="#{aTravelNote.text}" headerText="text" >
+                            <h:outputText value="#{aTravelNote.text}"/>
                         </p:column>
 
                         <!--
-                        ********************************
-                        *       USER PHOTO column      *
-                        ********************************
-                        -->
-                        <p:column headerText="User Photo" style="width:100px;">
-                            <div align="center">
-                                <h:graphicImage class="smallProfilePhoto" value="#{userController.userPhoto()}" />
-                            </div>
+                         *********************
+                         *    Public Video date   *
+                         *********************
+                         -->
+                        <p:column headerText="Date" sortBy="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}"
+                                  filterBy="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}" filterMatchMode="contains"
+                                  style="vertical-align: top; width: 100px;">
+                            <h:outputText value="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <div align="center">
+                                <!-- CREATE button: id is used since it is referenced to be activated or deactivated -->
+                                <p:commandButton id="createButton" value="Create" icon="fas fa-plus" styleClass="rounded-button"
+                                                 actionListener="#{travelNoteController.prepareCreate()}"
+                                                 update=":TravelNoteCreateForm" oncomplete="PF('TravelNoteCreateDialog').show()"/>
+                                &nbsp;
+                                <!-- VIEW button: id is used since it is referenced to be activated or deactivated -->
+<!--                                <p:commandButton id="viewButton" value="View" icon="fas fa-eye" styleClass="rounded-button"-->
+<!--                                                 update=":TravelNoteViewDlg" oncomplete="PF('TravelNoteViewDialog').show()"-->
+<!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
+<!--                                &nbsp;-->
+                                <!-- EDIT button: id is used since it is referenced to be activated or deactivated -->
+<!--                                <p:commandButton id="editButton" value="Edit" icon="fas fa-edit" styleClass="rounded-button"-->
+<!--                                                 update=":TravelNoteEditDlg" oncomplete="PF('TravelNoteEditDialog').show()"-->
+<!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
+
+                                &nbsp;
+                                <!-- ***************************************************
+                                Display a Confirmation dialog for the DELETE button
+                                id is used since it is referenced to be activated or not
+                                **************************************************** -->
+<!--                                <p:commandButton id="deleteButton" value="Delete" icon="fas fa-trash-alt"  styleClass="rounded-button"-->
+<!--                                                 actionListener="#{publicVideoController.destroy()}"-->
+<!--                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"-->
+<!--                                                 disabled="#{empty publicVideoController.selected}">-->
+
+<!--                                    <p:confirm header="Deletion Confirmation"-->
+<!--                                               message="Are you sure you want to permanently delete the selected video #{publicVideoController.selected.title} from the database?"/>-->
+<!--                                </p:commandButton>-->
+
+<!--                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">-->
+<!--                                    <div align="center">-->
+<!--                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-window-close" />-->
+<!--                                        &nbsp;-->
+<!--                                        <p:commandButton value="Yes" type="button" class="ui-confirmdialog-yes ui-button-danger" icon="fas fa-check-square" />-->
+<!--                                    </div>-->
+<!--                                </p:confirmDialog>-->
+                                <!-- *******************************************
+                                End of Display of the DELETE Confirmation dialog
+                                ******************************************** -->
+
+                                <!-- Play button: id is used since it is referenced to be activated or deactivated -->
+                                &nbsp;
+<!--                                <p:commandButton id="playButton" value="Play" icon="fas fa-play" styleClass="rounded-button"-->
+<!--                                                 update=":YouTubeVideoPlayDlg" oncomplete="PF('YouTubeVideoPlayDialog').show()"-->
+<!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
+                                &nbsp;
+                                <!-- ***************************************************
+                                Display a Confirmation dialog for the Share button
+                                id is used since it is referenced to be activated or not
+                                **************************************************** -->
+<!--                                <p:commandButton id="shareButton" value="Share" icon="fas fa-share"  styleClass="rounded-button"-->
+<!--                                                 actionListener="#{publicVideoController.share()}"-->
+<!--                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"-->
+<!--                                                 disabled="#{empty publicVideoController.selected}">-->
+<!--                                    <f:actionListener binding="#{userVideoController.clearListOfUserVideo()}"/>-->
+<!--                                    <p:confirm header="Share Confirmation"-->
+<!--                                               message="Are you sure you want to add the selected video to the Signed-In User's List of Favorite YouTube Videos"/>-->
+<!--                                </p:commandButton>-->
+
+<!--                                <p:confirmDialog id="shareConfirmDialogBox" global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">-->
+<!--                                    <div align="center">-->
+<!--                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-window-close" />-->
+<!--                                        &nbsp;-->
+<!--                                        <p:commandButton value="Yes" type="button" class="ui-confirmdialog-yes ui-button-danger" icon="fas fa-check-square" />-->
+<!--                                    </div>-->
+<!--                                </p:confirmDialog>-->
+                                <!-- *******************************************
+                                End of Display of the DELETE Confirmation dialog
+                                ******************************************** -->
+                            </div>
+                        </f:facet>
+
 
 <!--                        <f:facet name="footer">-->
 <!--                            <div align="center">-->
@@ -149,6 +223,13 @@
                 </p:panel>
             </h:form>
         </div>
+
+        <!--
+        Clicking the Create button displays the included
+        Create.xhtml file in a dialog window on top of this page.
+        -->
+        <ui:include src="/travelNote/Create.xhtml"/>
+
     </ui:define>
 </ui:composition>
 <!-- Do not enter tags after the composition line since they are ignored by JSF -->
