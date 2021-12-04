@@ -45,10 +45,10 @@
                                  rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect" update="createButton editButton deleteButton">
+                        <p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton">
 <!--                            uploadButton downloadButton deleteButton displayButton playButton-->
                         </p:ajax>
-                        <p:ajax event="rowUnselect" update="createButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 <!--                        uploadButton downloadButton deleteButton displayButton playButton-->
 
                         <!--
@@ -107,9 +107,9 @@
                                                  update=":TravelNoteCreateForm" oncomplete="PF('TravelNoteCreateDialog').show()"/>
                                 &nbsp;
                                 <!-- VIEW button: id is used since it is referenced to be activated or deactivated -->
-<!--                                <p:commandButton id="viewButton" value="View" icon="fas fa-eye" styleClass="rounded-button"-->
-<!--                                                 update=":TravelNoteViewDlg" oncomplete="PF('TravelNoteViewDialog').show()"-->
-<!--                                                 disabled="#{empty publicVideoController.selected}"/>-->
+                                <p:commandButton id="viewButton" value="View" icon="fas fa-eye" styleClass="rounded-button"
+                                                 update=":TravelNoteViewDlg" oncomplete="PF('TravelNoteViewDialog').show()"
+                                                 disabled="#{empty travelNoteController.selected}"/>
                                 &nbsp;
                                 <!-- EDIT button: id is used since it is referenced to be activated or deactivated-->
                                 <p:commandButton id="editButton" value="Edit" icon="fas fa-edit" styleClass="rounded-button"
@@ -258,6 +258,12 @@
         Create.xhtml file in a dialog window on top of this page.
         -->
         <ui:include src="/travelNote/Create.xhtml"/>
+
+        <!--
+        Clicking the View button displays the included
+        View.xhtml file in a dialog window on top of this page.
+        -->
+        <ui:include src="/travelNote/View.xhtml"/>
 
         <!--
         Clicking the Edit button displays the included

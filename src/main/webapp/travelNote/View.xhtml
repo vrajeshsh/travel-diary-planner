@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Arpit Thool on 2021.11.16
+  - Copyright © 2021 Arpit Thool. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <!--
+    ==========================================================
+    |  Clicking the VIEW button in List.xhtml displays this  |
+    |  Dialog window showing the selected TravelNote's data.    |
+    ==========================================================
+    -->
+    <p:dialog id="TravelNoteViewDlg" header="View YouTube Video Data" widgetVar="TravelNoteViewDialog"
+              modal="true" position="center" appendTo="@(body)"
+              showEffect="slide" hideEffect="fade" responsive="true" height="400" width="800" >
+        <!--
+        Various effect options can be used when showing and closing the dialog.
+        Use showEffect and hideEffect options to apply these effects:
+            blind, bounce, clip, drop, explode, fade, fold, highlight, puff,
+            pulsate, scale, shake, size, slide and transfer. [PrimeFaces Documentation]
+        -->
+        <h:form id="TravelNoteViewForm" class="ui-datatable-data">
+            <div align="center">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
+                                 rendered="#{travelNoteController.selected != null}">
+
+                        <!--                        video title-->
+                        <h:outputText value="Text:"/>
+                        <h:outputText value="#{travelNoteController.selected.text}"/>
+
+                        <!--                        video publication date-->
+                        <h:outputText value="Date Created:"/>
+                        <h:outputText value="#{travelNoteController.selected.dateCreated.toString().substring(0,10).replace('-','/')}"/>
+
+                    </p:panelGrid>
+                </h:panelGroup>
+                <br />
+                <h:panelGroup>
+                    <!-- CLOSE button -->
+                    <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"
+                                     onclick="PF('TravelNoteViewDialog').hide()" />
+                </h:panelGroup>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</html>
