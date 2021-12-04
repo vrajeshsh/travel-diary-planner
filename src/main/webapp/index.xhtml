@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--
+  - Created by Osman Balci on 2021.11.11
+  - Copyright © 2021 Osman Balci. All rights reserved.
+  -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <!-- This page is constructed based on the siteTemplate -->
-    <ui:composition template="/template/siteTemplate.xhtml">
+<!-- Do not enter tags before the composition line since they are ignored by JSF -->
 
-        <!-- Create the content for this page below -->
-        <ui:define name="editableContent">
-            <div align="center">
-                <!-- 
-                ========================================
-                *   PrimeFaces Galleria Image Slider   *
-                ========================================
-                Various effect options for transitions: blind, bounce, clip, drop, explode, fade,
-                fold, highlight, puff, pulsate, scale, shake, size, slide, and transfer.
-                -->
-                <p:galleria value="#{sliderController.listOfSliderImageFilenames}"
-                            var="imageFilename" effect="fade" effectSpeed="1000" showFilmstrip="true"
-                            panelWidth="500" panelHeight="313" showCaption="true">
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
 
-                    <p:graphicImage value="/resources/images/slider/#{imageFilename}"
-                                    alt="#{sliderController.description(imageFilename)}" title="" />
-                </p:galleria>
-            </div>
-        </ui:define>
-    </ui:composition>
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div class="card" align="center">
+            <!--
+            ========================================
+            |   PrimeFaces Galleria Image Slider   |
+            ========================================
+            (1) value="#{galleriaManager.listOfPhotos}" obtains a list of photo object references.
+            (2) var="aPhoto" is the iterator variable holding a photo object reference from the list.
+            (3) numVisible="7" indicates that 7 thumbnail photos are displayed below each photo.
+            (4) responsiveOptions defines a model of options for Responsive UI Design.
+                It enables the slider to resize to fit on a smartphone screen.
+            (5) circular="true" loops the slide show until it is stopped.
+            (6) autoPlay="true" automatically starts the slide show.
+            (7) If the user selects a thumbnail photo or clicks an arrow button, the slider
+                becomes manual until the page is refreshed to be auto play again.
+            (8) transitionInterval="4000" displays next photo after 4 seconds (4000 milliseconds).
+            (9) showCaption="true" enables caption display. We show only photo title in the caption.
+                Photo description (alt) is omitted.
+            (10) Change max-width to be the maximum width of the photos used.
+            -->
+            <p:galleria value="#{galleriaManager.listOfPhotos}" var="aPhoto" numVisible="7"
+                        responsiveOptions="#{galleriaManager.responsiveOptions1}"
+                        circular="true" autoPlay="true" transitionInterval="4000"
+                        showCaption="true" style="max-width: 800px">
+
+                <p:graphicImage value="#{aPhoto.regularPhotoFilepath}" alt="#{aPhoto.title}" style="width: 100%; display: block;" />
+
+                <f:facet name="caption">
+                    <span class="p-mb-2">#{aPhoto.title}</span>
+                </f:facet>
+
+                <f:facet name="thumbnail">
+                    <p:graphicImage value="#{aPhoto.thumbnailPhotoFilepath}" alt="#{aPhoto.title}" style="height: 50px; display: block;" />
+                </f:facet>
+
+            </p:galleria>
+        </div>
+    </ui:define>
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
 </html>
