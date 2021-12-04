@@ -22,7 +22,7 @@ dependencies {
 
     // primefaces-10.0.6.jar is located in the flat filesystem directory defined above
     // primefaces-10.0.6.jar provides UI components for JSF
-    compileOnly group: 'org.primefaces', name: 'primefaces', version: '10.0.6'
+    compileOnly group: 'org.primefaces', name: 'primefaces', version: '11.0.0-RC2'
 
     // imgscalr-lib-4.2.jar is a simple and efficient best practice image-scaling and manipulation library implemented in pure Java
     // imgscalr-lib-4.2.jar is located in the flat filesystem directory defined above
