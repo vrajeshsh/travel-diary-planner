@@ -45,10 +45,10 @@
                                  rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect" update="createButton editButton">
+                        <p:ajax event="rowSelect" update="createButton editButton deleteButton">
 <!--                            uploadButton downloadButton deleteButton displayButton playButton-->
                         </p:ajax>
-                        <p:ajax event="rowUnselect" update="createButton editButton"/>
+                        <p:ajax event="rowUnselect" update="createButton editButton deleteButton"/>
 <!--                        uploadButton downloadButton deleteButton displayButton playButton-->
 
                         <!--
@@ -121,22 +121,22 @@
                                 Display a Confirmation dialog for the DELETE button
                                 id is used since it is referenced to be activated or not
                                 **************************************************** -->
-<!--                                <p:commandButton id="deleteButton" value="Delete" icon="fas fa-trash-alt"  styleClass="rounded-button"-->
-<!--                                                 actionListener="#{publicVideoController.destroy()}"-->
-<!--                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"-->
-<!--                                                 disabled="#{empty publicVideoController.selected}">-->
+                                <p:commandButton id="deleteButton" value="Delete" icon="fas fa-trash-alt"  styleClass="rounded-button"
+                                                 actionListener="#{travelNoteController.destroy()}"
+                                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                                 disabled="#{empty travelNoteController.selected}">
 
-<!--                                    <p:confirm header="Deletion Confirmation"-->
-<!--                                               message="Are you sure you want to permanently delete the selected video #{publicVideoController.selected.title} from the database?"/>-->
-<!--                                </p:commandButton>-->
+                                    <p:confirm header="Deletion Confirmation"
+                                               message="Are you sure you want to permanently delete the travel note #{travelNoteController.selected.id} from the database?"/>
+                                </p:commandButton>
 
-<!--                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">-->
-<!--                                    <div align="center">-->
-<!--                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-window-close" />-->
-<!--                                        &nbsp;-->
-<!--                                        <p:commandButton value="Yes" type="button" class="ui-confirmdialog-yes ui-button-danger" icon="fas fa-check-square" />-->
-<!--                                    </div>-->
-<!--                                </p:confirmDialog>-->
+                                <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                                    <div align="center">
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fas fa-window-close" />
+                                        &nbsp;
+                                        <p:commandButton value="Yes" type="button" class="ui-confirmdialog-yes ui-button-danger" icon="fas fa-check-square" />
+                                    </div>
+                                </p:confirmDialog>
                                 <!-- *******************************************
                                 End of Display of the DELETE Confirmation dialog
                                 ******************************************** -->
