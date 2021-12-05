@@ -37,6 +37,7 @@ CREATE TABLE UserPhoto
 CREATE TABLE TravelNote
 (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    title VARCHAR(256) NOT NULL,
     text VARCHAR(10000) NOT NULL,
     user_id INT UNSIGNED,
     date_created DATE NOT NULL,
@@ -55,5 +56,6 @@ CREATE TABLE UserFile
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
+INSERT INTO User (username,password,first_name,last_name,address1,city,state,zipcode,security_question_number,security_answer,email) value ('abc','abc','abc','abc','abc','abc','VA',24060,1,'abc','abc@gmail.com');
 
 

@@ -39,6 +39,12 @@ public class TravelNote implements Serializable {
   private Integer id;
 
   @Basic(optional = false)
+  @NotNull(message = "Title is required!")
+  @Column(name = "title")
+  @Size(min = 1, max = 200)
+  private String title;
+
+  @Basic(optional = false)
   @NotNull(message = "Text is required!")
   @Column(name = "text")
   @Size(min = 1, max = 10000)
@@ -84,6 +90,14 @@ public class TravelNote implements Serializable {
     Getter and Setter methods
     ======================================================
    */
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
   public Integer getId() {
     return id;

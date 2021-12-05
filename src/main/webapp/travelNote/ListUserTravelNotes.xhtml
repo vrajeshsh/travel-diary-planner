@@ -69,13 +69,13 @@
                         </f:facet>
                         <!--
                         ********************************
-                        *        Travel Note ID column        *
+                        *        Travel Note Title column        *
                         ********************************
                         -->
-                        <p:column sortBy="#{aTravelNote.id}"
-                                  filterBy="#{aTravelNote.id}" filterMatchMode="contains"
-                                  headerText="Travel Note Id" style="width:80px;">
-                            <div align="center"><h:outputText value="#{aTravelNote.id}"/></div>
+                        <p:column sortBy="#{aTravelNote.title}"
+                                  filterBy="#{aTravelNote.title}" filterMatchMode="contains"
+                                  headerText="Title" style="width:80px;">
+                            <div align="center"><h:outputText value="#{aTravelNote.title}"/></div>
                         </p:column>
 
                         <!--
