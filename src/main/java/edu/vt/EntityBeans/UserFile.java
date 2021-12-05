@@ -74,9 +74,8 @@ public class UserFile implements Serializable {
     @ManyToOne
     private User userId;
 
-    @JoinColumn(name = "travel_note_id", referencedColumnName = "id")
-    @ManyToOne
-    private TravelNote travelNoteId;
+    @Column(name = "travel_note_id")
+    private Integer travelNoteId;
 
     /*
     ===================================================================
@@ -123,11 +122,11 @@ public class UserFile implements Serializable {
         this.userId = userId;
     }
 
-    public TravelNote getTravelNoteId() {
+    public Integer getTravelNoteId() {
         return travelNoteId;
     }
 
-    public void setTravelNoteId(TravelNote travelNoteId) {
+    public void setTravelNoteId(Integer travelNoteId) {
         this.travelNoteId = travelNoteId;
     }
 

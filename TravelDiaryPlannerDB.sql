@@ -52,7 +52,6 @@ CREATE TABLE UserFile
        filename VARCHAR(256) NOT NULL,
        user_id INT UNSIGNED,
        travel_note_id INT UNSIGNED,
-       FOREIGN KEY (travel_note_id) REFERENCES TravelNote(id) ON DELETE CASCADE
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
