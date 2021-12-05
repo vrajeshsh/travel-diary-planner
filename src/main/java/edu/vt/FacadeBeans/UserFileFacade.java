@@ -1,5 +1,6 @@
 package edu.vt.FacadeBeans;
 
+import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserFile;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -57,6 +58,18 @@ public class UserFileFacade extends AbstractFacade<UserFile> {
          */
         return entityManager.createNamedQuery("UserFile.findUserFilesByUserId")
                 .setParameter("userId", primaryKey)
+                .getResultList();
+    }
+
+    // Returns a list of object references of UserFile objects that belong to
+    // the User object and a specific travel note
+    public List<UserFile> findUserFilesByUserPrimaryKeyAndTravelNotePrimaryKey(Integer userPrimaryKey, Integer travelNotePrimaryKey) {
+        /*
+        The following statement obtains the results from the named database query.
+         */
+        return entityManager.createNamedQuery("UserFile.findUserFilesByUserIdAndTravelNoteId")
+                .setParameter("userId", userPrimaryKey)
+                .setParameter("travelNoteId", travelNotePrimaryKey)
                 .getResultList();
     }
 

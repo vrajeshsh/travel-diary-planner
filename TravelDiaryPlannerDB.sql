@@ -34,15 +34,6 @@ CREATE TABLE UserPhoto
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
-/* The UserFile table contains attributes of interest of a user's uploaded file. */
-CREATE TABLE UserFile
-(
-       id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-       filename VARCHAR(256) NOT NULL,
-       user_id INT UNSIGNED,
-       FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
-);
-
 CREATE TABLE TravelNote
 (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -53,3 +44,17 @@ CREATE TABLE TravelNote
     lng FLOAT( 10, 8 ) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
+
+/* The UserFile table contains attributes of interest of a user's uploaded file. */
+CREATE TABLE UserFile
+(
+       id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+       filename VARCHAR(256) NOT NULL,
+       user_id INT UNSIGNED,
+       travel_note_id INT UNSIGNED,
+       FOREIGN KEY (travel_note_id) REFERENCES TravelNote(id) ON DELETE CASCADE
+       FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+
+

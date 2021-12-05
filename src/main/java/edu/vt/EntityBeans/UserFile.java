@@ -34,6 +34,7 @@ representing the UserFile table in the CloudDriveDB database.
     , @NamedQuery(name = "UserFile.findById", query = "SELECT u FROM UserFile u WHERE u.id = :id")
     , @NamedQuery(name = "UserFile.findByFilename", query = "SELECT u FROM UserFile u WHERE u.filename = :filename")
     , @NamedQuery(name = "UserFile.findUserFilesByUserId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId")
+    , @NamedQuery(name = "UserFile.findUserFilesByUserIdAndTravelNoteId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId AND u.travelNoteId = :travelNoteId")
 })
 
 public class UserFile implements Serializable {
@@ -72,6 +73,10 @@ public class UserFile implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
+
+    @JoinColumn(name = "travel_note_id", referencedColumnName = "id")
+    @ManyToOne
+    private TravelNote travelNoteId;
 
     /*
     ===================================================================
@@ -116,6 +121,14 @@ public class UserFile implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    public TravelNote getTravelNoteId() {
+        return travelNoteId;
+    }
+
+    public void setTravelNoteId(TravelNote travelNoteId) {
+        this.travelNoteId = travelNoteId;
     }
 
     /*
