@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 
 /*
 The @Entity annotation designates this class as a JPA Entity POJO class
-representing the UserFile table in the CloudDriveDB database.
+representing the UserFile table in the TravelDiaryPlannerDB database.
  */
 @Entity
 
@@ -42,7 +42,7 @@ public class UserFile implements Serializable {
     /*
     ========================================================
     Instance variables representing the attributes (columns)
-    of the UserFile table in the CloudDriveDB database.
+    of the UserFile table in the TravelDiaryPlannerDB database.
 
     CREATE TABLE UserFile
     (
@@ -82,7 +82,7 @@ public class UserFile implements Serializable {
     /*
     ===================================================================
     Class constructors for instantiating a UserFile entity object to
-    represent a row in the UserFile table in the CloudDriveDB database.
+    represent a row in the UserFile table in the TravelDiaryPlannerDB database.
     ===================================================================
      */
     public UserFile() {
@@ -103,7 +103,7 @@ public class UserFile implements Serializable {
     /*
     ======================================================
     Getter and Setter methods for the attributes (columns)
-    of the UserFile table in the CloudDriveDB database.
+    of the UserFile table in the TravelDiaryPlannerDB database.
     ======================================================
      */
     public Integer getId() {

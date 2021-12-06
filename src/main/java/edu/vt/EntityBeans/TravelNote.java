@@ -13,7 +13,7 @@ import java.util.Date;
 
 /*
 The @Entity annotation designates this class as a JPA Entity POJO class
-representing the UserPhoto table in the CloudDriveDB database.
+representing the UserPhoto table in the TravelDiaryPlannerDB database.
  */
 @Entity
 
@@ -73,7 +73,7 @@ public class TravelNote implements Serializable {
   /*
     ===================================================================
     Class constructors for instantiating a UserFile entity object to
-    represent a row in the UserFile table in the CloudDriveDB database.
+    represent a row in the UserFile table in the TravelDiaryPlannerDB database.
     ===================================================================
      */
   public TravelNote() {
