@@ -102,6 +102,7 @@ public class FileUploadManager implements Serializable {
             multiple files with the same name.
              */
             String userId_filename = user.getId() + "_" + travelNoteId + "_" + event.getFile().getFileName();
+            //String userId_filename = user.getId() + "_" + event.getFile().getFileName();
 
             /*
             "The try-with-resources statement is a try statement that declares one or more resources. 
@@ -188,6 +189,11 @@ public class FileUploadManager implements Serializable {
 
     public void setTravelNoteId(Integer travelNoteId) {
         this.travelNoteId = travelNoteId;
+    }
+
+    public String setTravelNoteIdAndRedirect(Integer travelNoteId){
+        this.travelNoteId = travelNoteId;
+        return "/userFile/ListUserFiles?faces-redirect=true";
     }
 
 }

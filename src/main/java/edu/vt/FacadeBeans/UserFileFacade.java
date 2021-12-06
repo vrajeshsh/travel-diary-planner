@@ -87,4 +87,17 @@ public class UserFileFacade extends AbstractFacade<UserFile> {
                 .getResultList();
     }
 
+    public List<UserFile> findByFilenameAndTravelNoteId(String file_name, Integer travelNoteId) {
+        /*
+        The following @NamedQuery definition is given in UserFile entity class file:
+        @NamedQuery(name = "UserFile.findByFilename", query = "SELECT u FROM UserFile u WHERE u.filename = :filename")
+
+        The following statement obtains the results from the named database query.
+         */
+        return entityManager.createNamedQuery("UserFile.findByFilenameAndTravelNoteId")
+                .setParameter("filename", file_name)
+                .setParameter("travelNoteId", travelNoteId)
+                .getResultList();
+    }
+
 }

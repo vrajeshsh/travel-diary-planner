@@ -160,9 +160,9 @@
                                                  disabled="#{empty travelNoteController.selected}"/>
                                 &nbsp;
                                 <p:commandButton id="travelNoteFilesButton" icon="fas fa-eye" styleClass="rounded-button"
-                                          action="/userFile/ListUserFiles?faces-redirect=true" value="View Memories"
+                                          action="#{fileUploadManager.setTravelNoteIdAndRedirect(travelNoteController.selected.id)}" value="Travel Note Files"
                                           disabled="#{empty travelNoteController.selected}">
-                                    <f:actionListener binding="#{fileUploadManager.setTravelNoteId(aTravelNote.id)}"/>
+<!--                                    <f:actionListener binding="#{fileUploadManager.setTravelNoteId(aTravelNote.id)}"/>-->
                                 </p:commandButton>
                             </div>
                         </f:facet>
