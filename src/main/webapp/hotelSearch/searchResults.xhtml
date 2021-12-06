@@ -23,7 +23,7 @@
     <!-- Create the content for this page below -->
     <ui:define name="editableContent">
         <div align="center">
-            <h:form id="SearchedMoviesForm">
+            <h:form id="SearchedHotelsForm">
                 <p:dataView id="datalist"
                             value="#{searchedHotelController.listOfSearchedHotels}"
                             var="aHotel"
@@ -38,10 +38,10 @@
                     </f:facet>
 
                     <p:dataViewListItem>
-                        <!-- The p:panel defines a data grid cell displaying aSearchedMovie data -->
-                        <p:panel style="text-align:left" >
+                        <!-- The p:panel defines a data grid cell displaying aSearchedHotel data -->
+                        <p:panel style="text-align:left; width: 50%" >
 
-                            <h:panelGrid columns="1" style="width:50%"
+                            <h:panelGrid columns="1" style="width:100%"
                                          columnClasses="item">
 
                                 <h:outputText value="#{aHotel.name}" style="float:left; font-weight: bold"/>
@@ -54,7 +54,7 @@
                     </p:dataViewListItem>
 
                     <p:dataViewGridItem>
-                        <!-- The p:panel defines a data grid cell displaying aSearchedMovie data -->
+                        <!-- The p:panel defines a data grid cell displaying aHotel data -->
                         <p:panel style="text-align:left" >
 
                             <h:panelGrid columns="1" style="width:100%"

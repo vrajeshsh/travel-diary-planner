@@ -26,7 +26,7 @@ public class SearchedHotelController implements Serializable {
     ================
 
     ---------------------------------------------------------
-    Search for movies for the searchQuery entered by the user
+    Search for hotel for the searchQuery entered by the user
     ---------------------------------------------------------
      */
   public String performSearch() {
@@ -44,13 +44,12 @@ public class SearchedHotelController implements Serializable {
       // Instantiate a JSON object from the JSON data obtained
       JSONObject resultsJsonObject = new JSONObject(searchResultsData);
 
-      // Obtain a JSONArray of movie objects (Each movie is represented as a JSONObject)
       JSONArray jsonArrayFoundHotelSuggessions = resultsJsonObject.getJSONArray("suggestions");
 
       int index = 0;
       while (jsonArrayFoundHotelSuggessions.length() > index) {
 
-        // Get the movie JSONObject at index
+        // Get the hotel JSONObject at index
         JSONObject foundHotelSuggessions = jsonArrayFoundHotelSuggessions.getJSONObject(index);
 
         String groupName = foundHotelSuggessions.optString("group", "");
