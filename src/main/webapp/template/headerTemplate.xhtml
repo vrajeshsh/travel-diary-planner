@@ -31,8 +31,8 @@ siteTemplate for the entire site, achieving great maintainability.
                 <td align="left" valign="middle" style="width:230px;">
                     <!-- Use EL to reference the image file since it will be accessed from all UI pages -->
                     <h:link outcome="/index">
-                        <img src="#{resource['images:cloudDriveLogo.png']}"
-                             style="height:64px; width:auto; float:left; padding-left:10px; border:none;"
+                        <img src="#{resource['images:TravelDiaryPlannerLogo.png']}"
+                             style="height:100px; width:auto; float:left; padding-left:10px; border:none;"
                              alt="Cloud Drive Logo" />
                     </h:link>
                 </td>
@@ -63,11 +63,7 @@ siteTemplate for the entire site, achieving great maintainability.
 
                             <!-- Menu Options IF a User is Signed In -->
                             <c:if test="#{userController.isLoggedIn() == true}">
-                                <p:menuitem value="My Files" outcome="/userFile/ListUserFiles" icon="fas fa-list" >
-                                    <f:actionListener binding="#{userFileController.clearListOfUserFiles()}"/>
-                                </p:menuitem>
-
-                                <p:menuitem value="My Travel Notes" outcome="/travelNote/ListUserTravelNotes" icon="fas fa-list" >
+                                <p:menuitem value="My Travel Diary" outcome="/travelNote/ListUserTravelNotes" icon="fas fa-list" >
                                     <f:actionListener binding="#{travelNoteController.clearListOfUserTravelNotes()}"/>
                                 </p:menuitem>
 

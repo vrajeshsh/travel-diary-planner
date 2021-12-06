@@ -29,7 +29,7 @@
 
         <div align="center">
             <h:form id="TravelNoteListForm">
-                <p:panel header="#{userController.selected.firstName}&nbsp;#{userController.selected.lastName}'s Files" >
+                <p:panel header="#{userController.selected.firstName}&nbsp;#{userController.selected.lastName}'s Travel Diary" >
 
                     <p:dataTable id="datalist"
                                  value="#{travelNoteController.listOfTravelNotes}"
@@ -94,9 +94,8 @@
                         *        Travel Note location link      *
                         ********************************
                         -->
-                        <p:column sortBy="#{aTravelNote.googleMapsLink}"
-                                  filterBy="#{aTravelNote.googleMapsLink}" filterMatchMode="contains"
-                                  headerText="Location" style="width: 50px">
+                        <p:column
+                                  headerText="Location" style="width: 80px">
                             <a href="#{aTravelNote.googleMapsLink}" target="_blank">google maps link</a>
                         </p:column>
 
