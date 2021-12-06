@@ -46,10 +46,10 @@
                                  rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton mapButton">
+                        <p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton mapButton travelNoteFilesButton">
 <!--                            uploadButton downloadButton deleteButton displayButton playButton-->
                         </p:ajax>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton mapButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton mapButton travelNoteFilesButton"/>
 <!--                        uploadButton downloadButton deleteButton displayButton playButton-->
 
                         <!--
@@ -158,6 +158,12 @@
                                                  update=":MapViewDlg"
                                                  oncomplete="PF('MapViewDialog').show()"
                                                  disabled="#{empty travelNoteController.selected}"/>
+                                &nbsp;
+                                <p:commandButton id="travelNoteFilesButton" icon="fas fa-eye" styleClass="rounded-button"
+                                          action="/userFile/ListUserFiles?faces-redirect=true" value="View Memories"
+                                          disabled="#{empty travelNoteController.selected}">
+                                    <f:actionListener binding="#{fileUploadManager.setTravelNoteId(aTravelNote.id)}"/>
+                                </p:commandButton>
                             </div>
                         </f:facet>
 
@@ -182,7 +188,7 @@
                 The local variable's value is set by the EL expression during view build time.
                 -->
 
-<!--                <div align="center">-->
+                <div align="center">
                     <!--
                     p:gmap is a map component integrated with Google Maps JavaScript API.
                     See PrimeFaces User Guide for its documentation.
@@ -198,7 +204,7 @@
 <!--                    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>-->
 
                     <div class="card">
-                        <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:500px;height:400px"/>
+                        <p:gmap center="#{travelNoteController.selected.latLong}" zoom="15" type="HYBRID" style="width:500px;height:400px"/>
                     </div>
 
                     <h:panelGroup>
@@ -206,7 +212,7 @@
                         <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"
                                          onclick="PF('MapViewDialog').hide()" />
                     </h:panelGroup>
-<!--                </div>-->
+                </div>
             </h:form>
         </p:dialog>
         <!--

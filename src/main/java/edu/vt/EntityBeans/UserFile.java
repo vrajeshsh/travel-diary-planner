@@ -92,6 +92,12 @@ public class UserFile implements Serializable {
         userId = id;
     }
 
+    // Used in handleFileUpload() method of FileUploadManager
+    public UserFile(String filename, User id, Integer travelNoteId) {
+        this.filename = filename;
+        userId = id;
+        this.travelNoteId = travelNoteId;
+    }
     /*
     ======================================================
     Getter and Setter methods for the attributes (columns)
