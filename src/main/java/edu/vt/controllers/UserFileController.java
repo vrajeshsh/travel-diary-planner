@@ -376,7 +376,7 @@ public class UserFileController implements Serializable {
         // Obtain the object reference of the UserFile whose primary key = fileId
         UserFile userFile = userFileFacade.getUserFile(fileId);
 
-        // Obtain the userFile's filename as it is stored in the CloudDrive DB database
+        // Obtain the userFile's filename as it is stored in the TravelDiaryPlannerDB database
         String imageFileName = userFile.getFilename();
 
         // Extract the file extension from the filename

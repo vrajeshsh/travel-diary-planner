@@ -25,7 +25,7 @@ siteTemplate for the entire site, achieving great maintainability.
                 <!--
                 The widths of Column 1 and 3 must be set as fixed so that Column 2 can center its content.
                 ***************************************
-                Column 1 (Left): Cloud Drive Logo Image
+                Column 1 (Left): Travel Diary Planner logo image
                 ***************************************
                 -->
                 <td align="left" valign="middle" style="width:230px;">
@@ -33,7 +33,7 @@ siteTemplate for the entire site, achieving great maintainability.
                     <h:link outcome="/index">
                         <img src="#{resource['images:TravelDiaryPlannerLogo.png']}"
                              style="height:100px; width:auto; float:left; padding-left:10px; border:none;"
-                             alt="Cloud Drive Logo" />
+                             alt="Travel Diary Planner Logo" />
                     </h:link>
                 </td>
                 <!--
@@ -81,11 +81,59 @@ siteTemplate for the entire site, achieving great maintainability.
                                 <p:menuitem value="Create Account" outcome="/userAccount/CreateAccount" icon="fas fa-user-plus" />
                             </c:if>
 
+                            <p:menuitem value="Search Hotels" onclick="PF('HotelSearchDialog').show();return false;" icon="fas fa-search"/>
                         </p:menu>
                     </div>
                 </td>
             </tr>
         </table>
     </h:form>
+
+    <!--
+                 ====================================================================================
+                 |  Selecting Hotel based on city from the hamburger menu displays this Dialog window for  |
+                 |  the user to enter a search query and click the Search button to search for it.  |
+                 ====================================================================================
+                 -->
+    <p:dialog id="HotelSearchDlg" header="Search for Hotels based on city" responsive="true" position="center center"
+              widgetVar="HotelSearchDialog" modal="true" resizable="false" appendTo="@(body)" >
+
+        <h:form id="searchDialogForm2">
+            <div align="center">
+                <br />
+                <h:outputLabel for="searchQueryField" value="Enter City Name to Search for Hotels:" />
+                <br /><br />
+
+                <!--
+                The search query entered by the user in the inputText field is set to be
+                the value of the searchQuery property of the searchedHotelController
+                CDI @Named bean by using the Expression Language.
+                -->
+                <h:inputText id="searchQueryField" style="width:400px"
+                             value="#{searchedHotelController.searchQuery}" >
+                </h:inputText>
+                <br /><br /><br />
+
+                <!--  SEARCH button:
+                Clicking the Search button invokes the performSearch() method of the
+                searchedHotelController CDI @Named bean. The performSearch() method executes
+                the search for the searchQuery property value and at the end of the execution with
+
+                    return "HotelSearchResults?faces-redirect=true";
+
+                it returns "HotelSearchResults" as the name of the XHTML file to display.
+                -->
+                <p:commandButton id="searchButton2" value="Search" icon="fas fa-search" styleClass="rounded-button"
+                                 ajax="false" action="#{searchedHotelController.performSearch()}" />
+                &nbsp;&nbsp;
+
+                <!-- CANCEL button -->
+                <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                 immediate="true" onclick="PF('HotelSearchDialog').hide()" />
+                <br /><br />
+            </div>
+        </h:form>
+
+    </p:dialog>
 </ui:composition>
 </html>

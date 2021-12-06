@@ -3,6 +3,12 @@ package edu.vt.globals;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 This class is created to provide Convenience Class Methods (typed with the "static" keyword")
@@ -65,6 +71,75 @@ public final class Methods {
                 break;
             default:
                 System.out.print("Message Type is Out of Range!");
+        }
+    }
+
+    /**
+     * Return the content of a given URL as String
+     * @param apiURL: API URL to fetch the JSON data file from
+     * @return JSON data obtained from the given API URL as String
+     */
+    public static String readUrlContent2(String apiURL) throws Exception {
+        /*
+        reader is an object reference pointing to an object instantiated from the BufferedReader class.
+        Initially, it is "null" pointing to nothing.
+         */
+        BufferedReader reader = null;
+
+        try {
+            // Create a URL object from the webServiceURL given
+            URL url = new URL(apiURL);
+            HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
+            httpUrlConnection.setRequestMethod("GET");
+
+            Map<String, String> headers = new HashMap<>();
+
+            headers.put("x-rapidapi-host", "hotels4.p.rapidapi.com");
+            headers.put("x-rapidapi-key", "84454e0b1dmsh56f21d994e2c614p18fb6ejsn40145e1ebe9c");
+            headers.put("Host", "hotels4.p.rapidapi.com");
+
+            for (String headerKey : headers.keySet()) {
+                httpUrlConnection.setRequestProperty(headerKey, headers.get(headerKey));
+            }
+            /*
+            The BufferedReader class reads text from a character-input stream, buffering characters
+            so as to provide for the efficient reading of characters, arrays, and lines.
+             */
+            reader = new BufferedReader(new InputStreamReader(httpUrlConnection.getInputStream()));
+
+            // Create a mutable sequence of characters and store its object reference into buffer
+            StringBuilder buffer = new StringBuilder();
+
+            // Create an array of characters of size 10240
+            char[] chars = new char[10240];
+
+            int numberOfCharactersRead;
+            /*
+            The read(chars) method of the reader object instantiated from the BufferedReader class
+            reads 10240 characters as defined by "chars" into a portion of a buffered array.
+
+            The read(chars) method attempts to read as many characters as possible by repeatedly
+            invoking the read method of the underlying stream. This iterated read continues until
+            one of the following conditions becomes true:
+
+                (1) The specified number of characters have been read, thus returning the number of characters read.
+                (2) The read method of the underlying stream returns -1, indicating end-of-file, or
+                (3) The ready method of the underlying stream returns false, indicating that further input requests would block.
+
+            If the first read on the underlying stream returns -1 to indicate end-of-file then the read(chars) method returns -1.
+            Otherwise the read(chars) method returns the number of characters actually read.
+             */
+            while ((numberOfCharactersRead = reader.read(chars)) != -1) {
+                buffer.append(chars, 0, numberOfCharactersRead);
+            }
+
+            // Return the String representation of the created buffer
+            return buffer.toString();
+
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
         }
     }
 
