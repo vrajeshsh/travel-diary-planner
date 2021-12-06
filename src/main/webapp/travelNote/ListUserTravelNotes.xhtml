@@ -85,7 +85,7 @@
                         -->
                         <p:column sortBy="#{aTravelNote.text}"
                                   filterBy="#{aTravelNote.text}" filterMatchMode="contains"
-                                  headerText="text" >
+                                  headerText="Note" >
                             <h:outputText value="#{aTravelNote.text}"/>
                         </p:column>
 
@@ -96,7 +96,7 @@
                         -->
                         <p:column sortBy="#{aTravelNote.googleMapsLink}"
                                   filterBy="#{aTravelNote.googleMapsLink}" filterMatchMode="contains"
-                                  headerText="Location" >
+                                  headerText="Location" style="width: 50px">
                             <a href="#{aTravelNote.googleMapsLink}" target="_blank">google maps link</a>
                         </p:column>
 

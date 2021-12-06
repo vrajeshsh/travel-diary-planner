@@ -54,7 +54,7 @@
     -->
     <p:dialog id="TravelNoteCreateDlg" header="Create New Travel Note" widgetVar="TravelNoteCreateDialog"
               modal="true" position="center" appendTo="@(body)"
-              showEffect="slide" hideEffect="bounce" responsive="true" >
+              showEffect="slide" hideEffect="fade" responsive="true" >
         <!--
         Various effect options can be used when showing and closing the dialog.
         Use showEffect and hideEffect options to apply these effects:
@@ -78,9 +78,9 @@
                     <p:inputText id="title" value="#{travelNoteController.selected.title}" style="width:300px"
                                  required="true" />
 
-                    <p:outputLabel value="Text:" for="text" />
-                    <p:inputTextarea id="text" value="#{travelNoteController.selected.text}" style="width:300px"
-                                 required="true" rows="15" cols="80"/>
+                    <p:outputLabel value="Note:" for="text" />
+                    <p:inputTextarea id="text" value="#{travelNoteController.selected.text}" style="width:100%; height: 300px" autoResize="false"
+                                 required="true" />
 
                     <p:outputLabel value="Latitude:" for="lat" />
                     <p:inputText id="lat" value="#{travelNoteController.selected.lat}" style="width:300px"

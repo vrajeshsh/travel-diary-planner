@@ -27,7 +27,6 @@
         -->
         <h:form id="TravelNoteViewForm" class="ui-datatable-data">
             <div align="center">
-
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
                                  rendered="#{travelNoteController.selected != null}">
@@ -36,8 +35,8 @@
                         <h:outputText id="title" value="#{travelNoteController.selected.title}"   />
 
                         <!--                        video title-->
-                        <h:outputText value="Text:"/>
-                        <p:inputTextarea disabled="{true}" value="#{travelNoteController.selected.text}" rows="15" cols="80"/>
+                        <h:outputText value="Note:"/>
+                        <h:outputText value="#{travelNoteController.selected.text}" style="width: 300px; height: 200px"/>
 
                         <!--                        video publication date-->
                         <h:outputText value="Date Created:"/>
@@ -67,7 +66,6 @@
                     </p:column>
 
                 </p:dataTable>
-
                 <h:panelGroup>
                     <!-- CLOSE button -->
                     <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"
