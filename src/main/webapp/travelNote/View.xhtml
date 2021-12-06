@@ -16,9 +16,9 @@
     |  Dialog window showing the selected TravelNote's data.    |
     ==========================================================
     -->
-    <p:dialog id="TravelNoteViewDlg" header="View YouTube Video Data" widgetVar="TravelNoteViewDialog"
+    <p:dialog id="TravelNoteViewDlg" header="#{travelNoteController.selected.title}" widgetVar="TravelNoteViewDialog"
               modal="true" position="center" appendTo="@(body)"
-              showEffect="slide" hideEffect="fade" responsive="true" height="400" width="800" >
+              showEffect="slide" hideEffect="fade" responsive="true" height="400px" width="75%" >
         <!--
         Various effect options can be used when showing and closing the dialog.
         Use showEffect and hideEffect options to apply these effects:
@@ -46,6 +46,28 @@
                     </p:panelGrid>
                 </h:panelGroup>
                 <br />
+                <p:dataTable id="datalist"
+                             value="#{userFileController.getListOfUserTravelNoteFiles(travelNoteController.selected.id)}"
+                             var="aUserFile"
+                             widgetVar="userFilesDataTable"
+                             selectionMode="single"
+                             selection="#{userFileController.selected}"
+                             rowKey="#{aUserFile.id}"
+                             >
+
+                    <!--
+                    ********************************
+                    *       USER PHOTO column      *
+                    ********************************
+                    -->
+                    <p:column headerText="Travel Note Images" style="width:100px;">
+                        <div align="center">
+                            <h:graphicImage width="75%" value="#{userFileController.fileURL(aUserFile.filename)}" />
+                        </div>
+                    </p:column>
+
+                </p:dataTable>
+
                 <h:panelGroup>
                     <!-- CLOSE button -->
                     <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"

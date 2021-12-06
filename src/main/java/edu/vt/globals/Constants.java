@@ -32,7 +32,7 @@ public final class Constants {
 
     // Unix (macOS) or Linux
 
-        public static final String FILES_ABSOLUTE_PATH  = "/home/arpit/DocRoot/CloudStorage/FileStorage/";
+    public static final String FILES_ABSOLUTE_PATH  = "/home/arpit/DocRoot/CloudStorage/FileStorage/";
     public static final String PHOTOS_ABSOLUTE_PATH = "/home/arpit/DocRoot/CloudStorage/PhotoStorage/";
 //
 //    public static final String FILES_ABSOLUTE_PATH  = "/opt/wildfly/DocRoot/CloudStorage/FileStorage/";
@@ -74,7 +74,7 @@ public final class Constants {
     //---------------
     // To run locally
     //---------------
-    public static final String FILES_URI  = "http://localhost:8080/files/";
+    public static final String FILES_URI  = "http://localhost:8080/filesz/";
     public static final String PHOTOS_URI = "http://localhost:8080/photos/";
 
     //-----------------------------------------------------

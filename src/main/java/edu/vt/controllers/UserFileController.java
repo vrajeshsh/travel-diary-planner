@@ -517,4 +517,9 @@ public class UserFileController implements Serializable {
         return fileExtension.toUpperCase();
     }
 
+    public String fileURL(String filename){
+        return Constants.FILES_URI + filename;
+    }
+
+
 }
