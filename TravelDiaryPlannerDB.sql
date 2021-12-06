@@ -56,6 +56,3 @@ CREATE TABLE UserFile
        FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 );
 
-INSERT INTO User (username,password,first_name,last_name,address1,city,state,zipcode,security_question_number,security_answer,email) value ('abc','abc','abc','abc','abc','abc','VA',24060,1,'abc','abc@gmail.com');
-
-
