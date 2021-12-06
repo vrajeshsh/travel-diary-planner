@@ -1,5 +1,6 @@
 package edu.vt.FacadeBeans;
 
+import edu.vt.EntityBeans.User;
 import edu.vt.EntityBeans.UserFile;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -60,6 +61,18 @@ public class UserFileFacade extends AbstractFacade<UserFile> {
                 .getResultList();
     }
 
+    // Returns a list of object references of UserFile objects that belong to
+    // the User object and a specific travel note
+    public List<UserFile> findUserFilesByUserPrimaryKeyAndTravelNotePrimaryKey(Integer userPrimaryKey, Integer travelNotePrimaryKey) {
+        /*
+        The following statement obtains the results from the named database query.
+         */
+        return entityManager.createNamedQuery("UserFile.findUserFilesByUserIdAndTravelNoteId")
+                .setParameter("userId", userPrimaryKey)
+                .setParameter("travelNoteId", travelNotePrimaryKey)
+                .getResultList();
+    }
+
     // Returns a list of object references of UserFile objects whose name is file_name
     // It is assumed that file names are not unique and many files can have the same name
     public List<UserFile> findByFilename(String file_name) {
@@ -71,6 +84,19 @@ public class UserFileFacade extends AbstractFacade<UserFile> {
          */
         return entityManager.createNamedQuery("UserFile.findByFilename")
                 .setParameter("filename", file_name)
+                .getResultList();
+    }
+
+    public List<UserFile> findByFilenameAndTravelNoteId(String file_name, Integer travelNoteId) {
+        /*
+        The following @NamedQuery definition is given in UserFile entity class file:
+        @NamedQuery(name = "UserFile.findByFilename", query = "SELECT u FROM UserFile u WHERE u.filename = :filename")
+
+        The following statement obtains the results from the named database query.
+         */
+        return entityManager.createNamedQuery("UserFile.findByFilenameAndTravelNoteId")
+                .setParameter("filename", file_name)
+                .setParameter("travelNoteId", travelNoteId)
                 .getResultList();
     }
 

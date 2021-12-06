@@ -32,9 +32,12 @@
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
                                  rendered="#{travelNoteController.selected != null}">
 
+                        <h:outputLabel value="Title:" for="title" />
+                        <h:outputText id="title" value="#{travelNoteController.selected.title}"   />
+
                         <!--                        video title-->
                         <h:outputText value="Text:"/>
-                        <h:outputText value="#{travelNoteController.selected.text}"/>
+                        <p:inputTextarea disabled="{true}" value="#{travelNoteController.selected.text}" rows="15" cols="80"/>
 
                         <!--                        video publication date-->
                         <h:outputText value="Date Created:"/>

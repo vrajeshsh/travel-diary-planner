@@ -19,10 +19,10 @@
 
         <div align="center">
             <h:form id="UserFileListForm">
-                <p:panel header="#{userController.selected.firstName}&nbsp;#{userController.selected.lastName}'s Files" >
+                <p:panel header="#{userController.selected.firstName}'s files for&nbsp;#{travelNoteController.selected.title}" >
 
                     <p:dataTable id="datalist"
-                                 value="#{userFileController.listOfUserFiles}"
+                                 value="#{userFileController.getListOfUserTravelNoteFiles(travelNoteController.selected.id)}"
                                  var="aUserFile"
                                  widgetVar="userFilesDataTable"
                                  selectionMode="single"

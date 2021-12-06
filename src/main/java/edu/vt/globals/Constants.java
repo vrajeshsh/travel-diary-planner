@@ -30,13 +30,13 @@ public final class Constants {
     // To run locally
     //---------------
 
-    // Windows
-//    public static final String FILES_ABSOLUTE_PATH  = "C:/Users/Balci/DocRoot/CloudStorage/FileStorage/";
-//    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/Balci/DocRoot/CloudStorage/PhotoStorage/";
-
     // Unix (macOS) or Linux
-    public static final String FILES_ABSOLUTE_PATH  = "/Users/Balci/DocRoot/CloudStorage/FileStorage/";
-    public static final String PHOTOS_ABSOLUTE_PATH = "/Users/Balci/DocRoot/CloudStorage/PhotoStorage/";
+
+        public static final String FILES_ABSOLUTE_PATH  = "/home/arpit/DocRoot/CloudStorage/FileStorage/";
+    public static final String PHOTOS_ABSOLUTE_PATH = "/home/arpit/DocRoot/CloudStorage/PhotoStorage/";
+//
+//    public static final String FILES_ABSOLUTE_PATH  = "/opt/wildfly/DocRoot/CloudStorage/FileStorage/";
+//    public static final String PHOTOS_ABSOLUTE_PATH = "/opt/wildfly/DocRoot/CloudStorage/PhotoStorage/";
 
     //--------------------------------
     // To run on your AWS EC2 instance

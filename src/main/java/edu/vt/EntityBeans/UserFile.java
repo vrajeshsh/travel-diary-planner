@@ -32,8 +32,10 @@ representing the UserFile table in the CloudDriveDB database.
      */
     @NamedQuery(name = "UserFile.findAll", query = "SELECT u FROM UserFile u")
     , @NamedQuery(name = "UserFile.findById", query = "SELECT u FROM UserFile u WHERE u.id = :id")
-    , @NamedQuery(name = "UserFile.findByFilename", query = "SELECT u FROM UserFile u WHERE u.filename = :filename")
+        , @NamedQuery(name = "UserFile.findByFilename", query = "SELECT u FROM UserFile u WHERE u.filename = :filename")
+        , @NamedQuery(name = "UserFile.findByFilenameAndTravelNoteId", query = "SELECT u FROM UserFile u WHERE u.filename = :filename AND u.travelNoteId = :travelNoteId")
     , @NamedQuery(name = "UserFile.findUserFilesByUserId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId")
+    , @NamedQuery(name = "UserFile.findUserFilesByUserIdAndTravelNoteId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId AND u.travelNoteId = :travelNoteId")
 })
 
 public class UserFile implements Serializable {
@@ -73,6 +75,10 @@ public class UserFile implements Serializable {
     @ManyToOne
     private User userId;
 
+    @Basic(optional = false)
+    @Column(name = "travel_note_id")
+    private Integer travelNoteId;
+
     /*
     ===================================================================
     Class constructors for instantiating a UserFile entity object to
@@ -88,6 +94,12 @@ public class UserFile implements Serializable {
         userId = id;
     }
 
+    // Used in handleFileUpload() method of FileUploadManager
+    public UserFile(String filename, User id, Integer travelNoteId) {
+        this.filename = filename;
+        userId = id;
+        this.travelNoteId = travelNoteId;
+    }
     /*
     ======================================================
     Getter and Setter methods for the attributes (columns)
@@ -116,6 +128,14 @@ public class UserFile implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    public Integer getTravelNoteId() {
+        return travelNoteId;
+    }
+
+    public void setTravelNoteId(Integer travelNoteId) {
+        this.travelNoteId = travelNoteId;
     }
 
     /*

@@ -12,11 +12,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -126,7 +128,53 @@ public class UserFileController implements Serializable {
         return listOfUserFiles;
     }
 
-    /*
+    public List<UserFile> getListOfUserTravelNoteFiles(Integer travelNoteId) {
+
+        if (listOfUserFiles == null) {
+            /*
+            'user', the object reference of the signed-in user, was put into the SessionMap
+            in the initializeSessionMap() method in LoginManager upon user's sign in.
+             */
+            Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            User signedInUser = (User) sessionMap.get("user");
+
+            // Obtain the database primary key of the signedInUser object
+            Integer userPrimaryKey = signedInUser.getId();
+
+            // Obtain only those files from the database that belong to the signed-in user
+            listOfUserFiles = userFileFacade.findUserFilesByUserPrimaryKeyAndTravelNotePrimaryKey(userPrimaryKey, travelNoteId);
+
+            // Instantiate a new hash map object
+            cleanedFileNameHashMap = new HashMap<>();
+
+            /*
+            cleanedFileNameHashMap<KEY, VALUE>
+                KEY   = Integer fileId
+                VALUE = String cleanedFileNameForSelected
+             */
+            listOfUserFiles.forEach(userFile -> {
+
+                // Obtain the filename stored in CloudStorage/FileStorage as 'userId_filename'
+                String storedFileName = userFile.getFilename();
+
+                // Remove the "userId_" (e.g., "4_") prefix in the stored filename
+                String cleanedFileName = storedFileName.substring(storedFileName.indexOf("_") + 1);
+
+                // Obtain the file database Primary Key id
+                Integer fileId = userFile.getId();
+
+                // Create an entry in the hash map as a key-value pair
+                cleanedFileNameHashMap.put(fileId, cleanedFileName);
+            });
+        }
+        List<UserFile> copy = new ArrayList<UserFile>(listOfUserFiles);
+        clearListOfUserFiles();
+        return copy;
+    }
+
+    public void clearListOfUserFiles() {
+        listOfUserFiles = null;
+    }    /*
     ================
     Instance Methods
     ================

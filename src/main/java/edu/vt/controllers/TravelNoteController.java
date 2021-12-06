@@ -45,9 +45,14 @@ public class TravelNoteController implements Serializable {
     @EJB
     private TravelNoteFacade travelNoteFacade;
 
+    @EJB
+    private UserFileFacade userFileFacade;
+
     private TravelNote selected;
 
     private List<TravelNote> listOfTravelNotes = null;
+
+    private List<UserFile> listOfTravelNoteFiles = null;
 
     //  indicating if travel note data changed or not
     private Boolean travelNoteDataChanged;
@@ -224,6 +229,7 @@ public class TravelNoteController implements Serializable {
      *************************************************
      */
     public void destroy() {
+        this.deleteAllTravelNoteFiles();
         Methods.preserveMessages();
         /*
          */
@@ -248,6 +254,69 @@ public class TravelNoteController implements Serializable {
 
     public void clearListOfUserTravelNotes() {
         listOfTravelNotes = null;
+    }
+
+    /*
+    ***************************************************************
+    Return the List of User Files that Belong to the Signed-In User
+    ***************************************************************
+     */
+    public List<UserFile> getListOfTravelNoteFiles() {
+
+        if (listOfTravelNoteFiles == null && selected != null) {
+            /*
+            'user', the object reference of the signed-in user, was put into the SessionMap
+            in the initializeSessionMap() method in LoginManager upon user's sign in.
+             */
+            Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            User signedInUser = (User) sessionMap.get("user");
+
+            // Obtain the database primary key of the signedInUser object
+            Integer userPrimaryKey = signedInUser.getId();
+
+            // Obtain only those files from the database that belong to the signed-in user
+            listOfTravelNoteFiles = userFileFacade.findUserFilesByUserPrimaryKeyAndTravelNotePrimaryKey(userPrimaryKey, selected.getId());
+
+        }
+        return listOfTravelNoteFiles;
+    }
+
+    /*
+    ***********************************************
+    Delete all of the files that belong to the User
+    object whose database primary key is primaryKey
+    ***********************************************
+     */
+    public void deleteAllTravelNoteFiles() {
+
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        User signedInUser = (User) sessionMap.get("user");
+
+        // Obtain the database primary key of the signedInUser object
+        Integer userPrimaryKey = signedInUser.getId();
+        // Obtain the List of files that belongs to the user with primaryKey
+        List<UserFile> userTravelNoteFiles = userFileFacade.findUserFilesByUserPrimaryKeyAndTravelNotePrimaryKey(userPrimaryKey, selected.getId());
+
+        if (!userTravelNoteFiles.isEmpty()) {
+            // Java 8 looping over a list with lambda
+            userTravelNoteFiles.forEach(userFile -> {
+                try {
+                    /*
+                    Delete the user file if it exists.
+                    getFilePath() is given in UserFile.java.
+                     */
+                    Files.deleteIfExists(Paths.get(userFile.getFilePath()));
+
+                    // Remove the user's file record from the database
+                    userFileFacade.remove(userFile);
+
+                } catch (IOException ex) {
+                    Methods.showMessage("Fatal Error",
+                            "Something went wrong while deleting user files!",
+                            "See: " + ex.getMessage());
+                }
+            });
+        }
     }
 
 }

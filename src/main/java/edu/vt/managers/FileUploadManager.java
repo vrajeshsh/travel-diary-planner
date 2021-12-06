@@ -8,6 +8,7 @@ import edu.vt.FacadeBeans.UserFileFacade;
 import edu.vt.controllers.UserFileController;
 import edu.vt.globals.Constants;
 
+import javax.faces.event.ActionListener;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -21,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.criteria.CriteriaBuilder;
 
 // Needed for PrimeFaces fileUpload
 import org.primefaces.model.file.UploadedFile;
@@ -37,6 +39,8 @@ public class FileUploadManager implements Serializable {
 
     // Used by PrimeFaces fileUpload
     private UploadedFile uploadedFile;
+
+    private Integer travelNoteId;
 
     /*
     The @EJB annotation directs the EJB Container Manager to inject (store) the object reference of the
@@ -88,7 +92,7 @@ public class FileUploadManager implements Serializable {
 
         try {
             String user_name = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
             // user is the object reference of the signed-in User object
             User user = userFacade.findByUsername(user_name);
 
@@ -97,7 +101,8 @@ public class FileUploadManager implements Serializable {
             Since each file has its own primary key (unique id), the user can upload
             multiple files with the same name.
              */
-            String userId_filename = user.getId() + "_" + event.getFile().getFileName();
+            String userId_filename = user.getId() + "_" + travelNoteId + "_" + event.getFile().getFileName();
+            //String userId_filename = user.getId() + "_" + event.getFile().getFileName();
 
             /*
             "The try-with-resources statement is a try statement that declares one or more resources. 
@@ -117,7 +122,7 @@ public class FileUploadManager implements Serializable {
                 <> filename = userId_filename
                 <> user_id = user
              */
-            UserFile newUserFile = new UserFile(userId_filename, user);
+            UserFile newUserFile = new UserFile(userId_filename, user, travelNoteId);
 
             /*
             ----------------------------------------------------------------
@@ -180,6 +185,15 @@ public class FileUploadManager implements Serializable {
         outStream.close();
 
         return targetFile;
+    }
+
+    public void setTravelNoteId(Integer travelNoteId) {
+        this.travelNoteId = travelNoteId;
+    }
+
+    public String setTravelNoteIdAndRedirect(Integer travelNoteId){
+        this.travelNoteId = travelNoteId;
+        return "/userFile/ListUserFiles?faces-redirect=true";
     }
 
 }
