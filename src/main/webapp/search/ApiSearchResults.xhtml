@@ -48,12 +48,6 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{aSearchedWeather.name}"/>
                                         </f:facet>
-
-
-                                        <!-- Ratings display -->
-
-
-                                        <!-- Short list of cast members -->
                                         <h:outputText value="#{aSearchedWeather.getCountry()}" style="float:left"/>
                                         <h:outputText value="Local Date Time : #{aSearchedWeather.getLocaltime()}" style="float:left"/>
                                         <br/>
@@ -62,10 +56,6 @@
                                         <h:outputText value="Humidity : #{aSearchedWeather.getHumidity()}" style="float:left"/>
                                         <h:outputText value="Wind Speed : #{aSearchedWeather.getWind_mph ()} mph" style="float:left"/>
                                         <h:outputText value="Precipitation : #{aSearchedWeather.getPrecip_mm ()} mm" style="float:left"/>
-
-                                        <!-- MPAA Rating, duration, release date -->
-
-
                                     </h:panelGrid>
 
                                 </h:panelGrid>
@@ -88,11 +78,6 @@
                                             <h:outputText value="#{aSearchedWeather.name}"/>
                                         </f:facet>
 
-
-                                        <!-- Ratings display -->
-
-
-                                        <!-- Short list of cast members -->
                                         <h:outputText value="#{aSearchedWeather.getCountry()}" style="float:left"/>
                                         <h:outputText value="Local Date Time : #{aSearchedWeather.getLocaltime()}" style="float:left"/>
                                         <br/>
@@ -101,12 +86,7 @@
                                         <h:outputText value="Humidity : #{aSearchedWeather.getHumidity()}" style="float:left"/>
                                         <h:outputText value="Wind Speed : #{aSearchedWeather.getWind_mph ()} mph" style="float:left"/>
                                         <h:outputText value="Precipitation : #{aSearchedWeather.getPrecip_mm ()} mm" style="float:left"/>
-
-                                        <!-- MPAA Rating, duration, release date -->
-
-
                                     </h:panelGrid>
-
                                 </h:panelGrid>
                             </p:panel>
                         </div>
@@ -130,14 +110,6 @@
                                     <p:graphicImage url="https:#{aSearchedLocation.foreIcon}" width="92px" style="float:left" />
 
                                     <h:panelGrid style="width:100%; margin-left:10px">
-
-
-
-                                        <!-- Ratings display -->
-
-
-                                        <!-- Short list of cast members -->
-
                                         <h:outputText value="Date : #{aSearchedLocation.getDate()}" style="float:left"/>
                                         <h:outputText value="Sunrise : #{aSearchedLocation.getSunrise()}" style="float:left"/>
                                         <h:outputText value="Sunset : #{aSearchedLocation.getSunset()}" style="float:left"/>
@@ -148,11 +120,7 @@
                                         <h:outputText value="Total Precipitation : #{aSearchedLocation.getTotalprecip_mm()} mm" style="float:left"/>
                                         <h:outputText value="Chances of Rain : #{aSearchedLocation.getDaily_will_it_rain()}" style="float:left"/>
                                         <h:outputText value="Chances of Snow : #{aSearchedLocation.getDaily_will_it_snow()}" style="float:left"/>
-                                        <!-- MPAA Rating, duration, release date -->
-
-
                                     </h:panelGrid>
-
                                 </h:panelGrid>
                             </p:panel>
                         </div>
@@ -163,20 +131,11 @@
                         <div align="center" style="width: 100%">
                             <!-- The p:panel defines a data grid cell displaying aSearchedWeather data -->
                             <p:panel style="text-align:left" >
-
                                 <h:panelGrid columns="3" style="width:100%"
                                              columnClasses="columnWeatherPoster, columnMiddlePart, columnInfoButton">
                                     <p:graphicImage url="https:#{aSearchedLocation.foreIcon}" width="92px" style="float:left" />
 
                                     <h:panelGrid style="width:100%; margin-left:10px">
-
-
-
-                                        <!-- Ratings display -->
-
-
-                                        <!-- Short list of cast members -->
-
                                         <h:outputText value="Date : #{aSearchedLocation.getDate()}" style="float:left"/>
                                         <h:outputText value="Sunrise : #{aSearchedLocation.getSunrise()}" style="float:left"/>
                                         <h:outputText value="Sunset : #{aSearchedLocation.getSunset()}" style="float:left"/>
@@ -187,17 +146,18 @@
                                         <h:outputText value="Total Precipitation : #{aSearchedLocation.getTotalprecip_mm()} mm" style="float:left"/>
                                         <h:outputText value="Chances of Rain : #{aSearchedLocation.getDaily_will_it_rain()}" style="float:left"/>
                                         <h:outputText value="Chances of Snow : #{aSearchedLocation.getDaily_will_it_snow()}" style="float:left"/>
-                                        <!-- MPAA Rating, duration, release date -->
-
-
                                     </h:panelGrid>
-
                                 </h:panelGrid>
                             </p:panel>
                         </div>
                     </p:dataViewGridItem>
                 </p:dataView>
             </h:form>
+            <div align="center">
+                <!-- GO BACK button -->
+                <p:button id="backButton" icon="fas fa-arrow-left" styleClass="ui-button-outlined"
+                          outcome="/index" value="Go Back"/>
+            </div>
         </div>
 
     </ui:define>

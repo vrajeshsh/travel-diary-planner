@@ -110,7 +110,7 @@ siteTemplate for the entire site, achieving great maintainability.
                 the value of the searchQuery property of the searchedHotelController
                 CDI @Named bean by using the Expression Language.
                 -->
-                <h:inputText id="searchQueryField" style="width:400px"
+                <h:inputText id="searchQueryField" style="width:400px" required="true" requiredMessage="Please enter the city in which you want to search hotels for."
                              value="#{searchedHotelController.searchQuery}" >
                 </h:inputText>
                 <br /><br /><br />
@@ -127,7 +127,6 @@ siteTemplate for the entire site, achieving great maintainability.
                 <p:commandButton id="searchButton2" value="Search" icon="fas fa-search" styleClass="rounded-button"
                                  ajax="false" action="#{searchedHotelController.performSearch()}" />
                 &nbsp;&nbsp;
-
                 <!-- CANCEL button -->
                 <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
                                  immediate="true" onclick="PF('HotelSearchDialog').hide()" />

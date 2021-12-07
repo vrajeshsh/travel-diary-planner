@@ -28,10 +28,20 @@ public class ApiSearchController implements Serializable {
      */
     // Provided by the User
     private String locationQuery;
+
     private SearchedLocation selected;
+
     private List<SearchedLocation> listOfWeatherDetails;
+
     private List<SearchedWeather> listOfLocationWeather;
+
     private Integer forecastDays;
+
+    /*
+    =========================
+    Getter and Setter Methods
+    =========================
+     */
 
     public Integer getForecastDays() {
         return forecastDays;
@@ -74,10 +84,10 @@ public class ApiSearchController implements Serializable {
     }
 
     /*
-            ================
-            Instance Methods
-            ================
-             */
+    ================
+     Instance Methods
+    ================
+    */
     public String performSearch() {
 
         selected = null;
@@ -91,33 +101,27 @@ public class ApiSearchController implements Serializable {
         // Spaces in search query must be replaced with "+"
         locationQuery = locationQuery.replaceAll(" ", "+");
 
-
         try {
-                    String weatherApiUrl = "https://api.weatherapi.com/v1/forecast.json?key=71d43d8a0f4e45c3a9a13750212411&q="+
-                    locationQuery+"&days="+forecastDays;
+            String weatherApiUrl = "https://api.weatherapi.com/v1/forecast.json?key=71d43d8a0f4e45c3a9a13750212411&q="+
+            locationQuery+"&days="+forecastDays;
 
             // Obtain the JSON file (String of characters) containing the search results
             // The readUrlContent() method is given below
             String searchResultsJsonData = readUrlContent(weatherApiUrl);
-            ////////////////System.out.println("searchResultsJsonData : "+searchResultsJsonData);
 
-        /*
-        Redirecting to show a JSF page involves more than one subsequent requests and
-        the messages would die from one request to another if not kept in the Flash scope.
-        Since we will redirect to show the search Results page, we invoke preserveMessages().
-         */
+            /*
+            Redirecting to show a JSF page involves more than one subsequent requests and
+            the messages would die from one request to another if not kept in the Flash scope.
+            Since we will redirect to show the search Results page, we invoke preserveMessages().
+             */
             JSONObject searchResultsJsonObject = new JSONObject(searchResultsJsonData);
-            ////////////////System.out.println("searchResultsJsonObject"+searchResultsJsonObject);
             JSONObject jsonArrayFoundLocations = searchResultsJsonObject.getJSONObject("location");
             JSONObject jsonArrayFoundCurrent = searchResultsJsonObject.getJSONObject("current");
             JSONObject jsonArrayFoundCondition = jsonArrayFoundCurrent.getJSONObject("condition");
-            ////////////////System.out.println("jsonArrayFoundCondition : "+jsonArrayFoundCondition);
             JSONObject jsonArrayFoundForecast= searchResultsJsonObject.getJSONObject("forecast");
-            ////////////////System.out.println("jsonArrayFoundForecast : "+jsonArrayFoundForecast);
             JSONArray jsonArrayForecastDay= jsonArrayFoundForecast.getJSONArray("forecastday");
-            ////////////////System.out.println("jsonArrayForecastDay : "+jsonArrayForecastDay);
 
-
+            // extract the data we want from the fetched JSON object
             String name = jsonArrayFoundLocations.getString("name");
             String country = jsonArrayFoundLocations.getString("country");
             Double temp_c = jsonArrayFoundCurrent.getDouble("temp_c");
@@ -129,31 +133,25 @@ public class ApiSearchController implements Serializable {
             String localtime = jsonArrayFoundLocations.getString("localtime");
             String icon = jsonArrayFoundCondition.getString("icon");
 
-
             String cent = temp_c.toString();
             String far = temp_f.toString();
             String humid = humidity.toString();
             String wind = wind_mph.toString();
             String precip = precip_mm.toString();
 
-
-            ////////////////System.out.println(name + country + cent + far + text + icon + humid + wind + precip + localtime);
+            // create the SearchedWeather object from the data
             SearchedWeather weather = new SearchedWeather(name, country, cent, far, text, icon, humid, wind, precip, localtime);
 
+            // add the object to the list
             listOfLocationWeather.add(weather);
+
             int i = 0;
             while(i<= forecastDays) {
-                ////////////////System.out.println("Inside");
+                // extract the data from the JSON object
                 JSONObject jsonArrayDayDetails = jsonArrayForecastDay.getJSONObject(i);
-
-
                 JSONObject jsonObjectDay = jsonArrayDayDetails.getJSONObject("day");
-                //                ////////////////System.out.println("jsonObjectDay : " + jsonObjectDay);
                 JSONObject jsonObjectCondition = jsonObjectDay.getJSONObject("condition");
-                //                ////////////////System.out.println("jsonObjectCondition : "+jsonObjectCondition);
                 JSONObject jsonObjectAstro = jsonArrayDayDetails.getJSONObject("astro");
-                //                ////////////////System.out.println("jsonObjectAstro : "+jsonObjectAstro);
-
 
                 // Forecast
                 String date = jsonArrayDayDetails.getString("date");
@@ -171,8 +169,6 @@ public class ApiSearchController implements Serializable {
                 String sunset = jsonObjectAstro.getString("sunset");
                 String rain, snow;
 
-
-                //////////////////System.out.println(name+country+temp_c+temp_f+text+icon+humidity+wind_mph+precip_mm+localtime);
                 String max_c = maxtemp_c.toString();
                 String max_f = maxtemp_f.toString();
                 String min_c = mintemp_c.toString();
@@ -181,11 +177,10 @@ public class ApiSearchController implements Serializable {
                 String max_wind = maxwind_mph.toString();
                 String tot_precip = totalprecip_mm.toString();
 
+                // process the various parameters to get meaningful result
                 if (daily_will_it_rain == 1) {
                     rain = "Yes";
-
                 } else if (daily_will_it_rain == 0) {
-                    /* Round the calories value to 2 decimal places */
                     rain = "No";
                 } else {
                     rain = "NA";
@@ -193,39 +188,37 @@ public class ApiSearchController implements Serializable {
 
                 if (daily_will_it_snow == 1) {
                     snow = "Yes";
-
                 } else if (daily_will_it_snow == 0) {
-                    /* Round the calories value to 2 decimal places */
                     snow = "No";
                 } else {
                     snow = "NA";
                 }
 
-
-                //////////////////System.out.println(max_c + max_f + min_c + min_f + avg_humid + max_wind + tot_precip);
-                //////////////////System.out.println(name + country + cent + far + text + icon + humid + wind + precip + localtime + max_c + max_f + min_c + min_f + avg_humid + max_wind + tot_precip + rain + snow);
+                // create the SearchedLocation object from the data
                 SearchedLocation location = new SearchedLocation(date,max_c, max_f, min_c, min_f, avg_humid, max_wind, tot_precip, rain, snow, foreIcon, sunrise, sunset);
 
                 // Add the newly created weather object to the list of searchedLocation
                 listOfWeatherDetails.add(location);
 
-
                 i++;
-
             }
 
         } catch (Exception ex) {
-            //Methods.showMessage("Information", "No Results!", "No weather information found for the search location!");
-            clear();
+            // print exception
+            System.out.println("Exception :"+ex);
         }
 
-        locationQuery = "";
+        // clear the search parameters
+        this.clearLocationQuery();
+
+        // return the redirect the string
         return "/search/ApiSearchResults?faces-redirect=true";
     }
 
-
-    public void clear() {
-        locationQuery = null;
+    // this method clears the search parameters given by the user
+    public void clearLocationQuery() {
+        locationQuery = "";
+        forecastDays = null;
     }
 
 }
