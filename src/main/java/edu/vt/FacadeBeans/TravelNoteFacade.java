@@ -43,18 +43,15 @@ public class TravelNoteFacade extends AbstractFacade<TravelNote> {
      *********************
      */
 
-    // Returns the object reference of the UserFile object whose primary key is id
+    // Returns the object reference of the TravelNote object whose primary key is id
     public TravelNote getUserTravelNote(int id) {
         return entityManager.find(TravelNote.class, id);
     }
 
-    // Returns a list of object references of UserFile objects that belong to
+    // Returns a list of object references of TravelNote objects that belong to
     // the User object whose database Primary Key = primaryKey
     public List<TravelNote> findTravelNotesByUserPrimaryKey(User signedInUser) {
         /*
-        The following @NamedQuery definition is given in UserFile entity class file:
-        @NamedQuery(name = "UserFile.findUserFilesByUserId", query = "SELECT u FROM UserFile u WHERE u.userId.id = :userId")
-
         The following statement obtains the results from the named database query.
          */
         return entityManager.createNamedQuery("TravelNote.findTravelNotesByUserDatabasePrimaryKey")
