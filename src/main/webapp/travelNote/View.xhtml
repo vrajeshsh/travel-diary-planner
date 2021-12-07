@@ -18,44 +18,48 @@
     -->
     <p:dialog id="TravelNoteViewDlg" header="#{travelNoteController.selected.title}" widgetVar="TravelNoteViewDialog"
               modal="true" position="center" appendTo="@(body)"
-              showEffect="slide" hideEffect="fade" responsive="true" height="400px" width="75%" >
+              showEffect="slide" hideEffect="fade" responsive="true" height="400" width="800" >
         <!--
         Various effect options can be used when showing and closing the dialog.
         Use showEffect and hideEffect options to apply these effects:
             blind, bounce, clip, drop, explode, fade, fold, highlight, puff,
             pulsate, scale, shake, size, slide and transfer. [PrimeFaces Documentation]
         -->
-        <h:form id="TravelNoteViewForm" class="ui-datatable-data">
+        <h:form id="TravelNoteViewForm" class="ui-datatable-data" rendered="#{travelNoteController.selected != null}">
             <div align="center">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
-                                 rendered="#{travelNoteController.selected != null}">
                         <!--
                         ********************************
                         *          TITLE          *
                         ********************************
                         -->
-                        <h:outputLabel value="Title:" for="title" />
-                        <h:outputText id="title" value="#{travelNoteController.selected.title}"   />
+                <div>
+                    <h:outputLabel  value="Title:" for="title"  style="font-style: italic"/>
+                </div>
+                <div style="background: aliceblue">
+                    <h:outputText id="title" value="#{travelNoteController.selected.title}" />
+                </div>
                         <!--
                         ********************************
                         *          NOTE          *
                         ********************************
                         -->
-                        <!--                        video title-->
-                        <h:outputText value="Note:"/>
-                        <h:outputText value="#{travelNoteController.selected.text}" style="width: 300px; height: 200px"/>
+                <div>
+                    <h:outputText value="Note:" style="font-style: italic"/>
+                </div>
+                <div style="background: aliceblue ">
+                    <h:outputText value="#{travelNoteController.selected.text}" />
+                </div>
                         <!--
                         ********************************
                         *          DATE CREATED          *
                         ********************************
                         -->
-                        <!--                        video publication date-->
-                        <h:outputText value="Date Created:"/>
-                        <h:outputText value="#{travelNoteController.selected.dateCreated.toString().substring(0,10).replace('-','/')}"/>
-
-                    </p:panelGrid>
-                </h:panelGroup>
+                <div>
+                    <h:outputText value="Date Created:" style="font-style: italic"/>
+                </div>
+                <div style="background: aliceblue ">
+                    <h:outputText value="#{travelNoteController.selected.dateCreated.toString().substring(0,10).replace('-','/')}"/>
+                </div>
                 <br />
 
                 <!--
