@@ -23,8 +23,13 @@
 
             <h:form id="WeatherSearchForm">
                 <p:panel>                
-                    <h:panelGrid columns="4">
-                        <h:outputLabel value="Loaction: " style="margin-right: auto"/>
+                    <h:panelGrid columns="2">
+                        <!--
+                        ********************************
+                        *        Location input        *
+                        ********************************
+                        -->
+                        <p:outputLabel value="Loaction: " style="margin-right: auto" for="locationQuery"/>
 
                         <p:inputText id="locationQuery" value="#{apiSearchController.locationQuery}"
                         required="true" style="float:right" requiredMessage="Please Enter a Location to search!"
@@ -32,10 +37,12 @@
 
                         </p:inputText>
 
-                    </h:panelGrid>
-                    <br/>
-                    <h:panelGrid columns="4">
-                        <h:outputLabel value="Forecast Days: " />
+                        <!--
+                        ********************************
+                        *        Forecast input        *
+                        ********************************
+                        -->
+                        <p:outputLabel value="Forecast Days: " />
 
                         <p:selectOneMenu id="forecastDays" value="#{apiSearchController.forecastDays}"
                                          required="true"  requiredMessage="Please Select the number of days you want to see the forecast for!" >
@@ -54,6 +61,7 @@
                             <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
                                              ajax="false" action="#{apiSearchController.performSearch()}" />
                             &nbsp;
+                            <!-- CANCEL button -->
                             <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
                                              onclick="PF('WeatherSearchDialog').hide()" immediate="true" />
                         </div>

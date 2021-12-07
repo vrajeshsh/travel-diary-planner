@@ -31,7 +31,7 @@
                             style="width:100%">
 
                     <f:facet name="header">
-                        <h:outputText value="Weather Search Results" />
+                        <h:outputText value="Current Weather Results" />
                     </f:facet>
 
                     <p:dataViewListItem>
@@ -42,8 +42,18 @@
 
                                 <h:panelGrid columns="3" style="width:100%"
                                              columnClasses="columnWeatherPoster, columnMiddlePart, columnInfoButton">
+                                    <!--
+                                    ********************************
+                                    *        Weather Image       *
+                                    ********************************
+                                    -->
                                     <p:graphicImage url="https:#{aSearchedWeather.icon}" width="92px" style="float:left" />
 
+                                    <!--
+                                    ********************************
+                                    *        Weather data       *
+                                    ********************************
+                                    -->
                                     <h:panelGrid style="width:100%; margin-left:10px">
                                         <f:facet name="header">
                                             <h:outputText value="#{aSearchedWeather.name}"/>
@@ -71,8 +81,18 @@
 
                                 <h:panelGrid columns="3" style="width:100%"
                                              columnClasses="columnWeatherPoster, columnMiddlePart, columnInfoButton">
+                                    <!--
+                                    ********************************
+                                    *        Weather iamge       *
+                                    ********************************
+                                    -->
                                     <p:graphicImage url="https:#{aSearchedWeather.icon}" width="92px" style="float:left" />
 
+                                    <!--
+                                    ********************************
+                                    *        Weather data       *
+                                    ********************************
+                                    -->
                                     <h:panelGrid style="width:100%; margin-left:10px">
                                         <f:facet name="header">
                                             <h:outputText value="#{aSearchedWeather.name}"/>
@@ -111,8 +131,18 @@
 
                                 <h:panelGrid columns="3" style="width:100%"
                                              columnClasses="columnWeatherPoster, columnMiddlePart, columnInfoButton">
+                                    <!--
+                                    ********************************
+                                    *        Weather Image       *
+                                    ********************************
+                                    -->
                                     <p:graphicImage url="https:#{aSearchedLocation.foreIcon}" width="92px" style="float:left" />
 
+                                    <!--
+                                    ********************************
+                                    *        Weather data       *
+                                    ********************************
+                                    -->
                                     <h:panelGrid style="width:100%; margin-left:10px">
                                         <h:outputText value="Date : #{aSearchedLocation.getDate()}" style="float:left"/>
                                         <h:outputText value="Sunrise : #{aSearchedLocation.getSunrise()}" style="float:left"/>
@@ -137,8 +167,18 @@
                             <p:panel style="text-align:left" >
                                 <h:panelGrid columns="3" style="width:100%"
                                              columnClasses="columnWeatherPoster, columnMiddlePart, columnInfoButton">
+                                    <!--
+                                    ********************************
+                                    *        Weather image       *
+                                    ********************************
+                                    -->
                                     <p:graphicImage url="https:#{aSearchedLocation.foreIcon}" width="92px" style="float:left" />
 
+                                    <!--
+                                    ********************************
+                                    *        Weather data       *
+                                    ********************************
+                                    -->
                                     <h:panelGrid style="width:100%; margin-left:10px">
                                         <h:outputText value="Date : #{aSearchedLocation.getDate()}" style="float:left"/>
                                         <h:outputText value="Sunrise : #{aSearchedLocation.getSunrise()}" style="float:left"/>
