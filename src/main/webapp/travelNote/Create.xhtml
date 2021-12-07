@@ -11,6 +11,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<!--NEEDED FOR DATE PICKER-->
 <script type="text/javascript">
     PrimeFaces.locales ['de'] = {
         closeText: 'Schließen',
@@ -74,25 +75,52 @@
                     with property (instance variable) values set to empty or null. The inputText data fields below are
                     intended to assign user-provided values to the properties of the newly created Public Video object.
                     -->
+                    <!--
+                    ********************************
+                    *          TITLE          *
+                    ********************************
+                    -->
                     <p:outputLabel value="Title:" for="title" />
                     <p:inputText id="title" value="#{travelNoteController.selected.title}" style="width:300px"
-                                 required="true" />
+                                 required="true" requiredMessage="Please enter a Title."/>
 
+                    <!--
+                    ********************************
+                    *          NOTE          *
+                    ********************************
+                    -->
                     <p:outputLabel value="Note:" for="text" />
                     <p:inputTextarea id="text" value="#{travelNoteController.selected.text}" style="width:100%; height: 300px" autoResize="false"
-                                 required="true" />
+                                 required="true" requiredMessage="Please enter some Travel Note text."/>
 
+                    <!--
+                    ********************************
+                    *          LATITUDE          *
+                    ********************************
+                    -->
                     <p:outputLabel value="Latitude:" for="lat" />
                     <p:inputText id="lat" value="#{travelNoteController.selected.lat}" style="width:300px"
-                                 required="true" />
+                                 placeholder="47.676787"
+                                 required="true" requiredMessage="Please enter the Latitude value."/>
 
+                    <!--
+                    ********************************
+                    *          LONGITUDE          *
+                    ********************************
+                    -->
                     <p:outputLabel value="Longitude:" for="lng" />
                     <p:inputText id="lng" value="#{travelNoteController.selected.lng}" style="width:300px"
-                                 required="true" />
+                                 placeholder="-74.676767"
+                                 required="true" requiredMessage="Please enter the Longitude value."/>
 
+                    <!--
+                    ********************************
+                    *          DATE CREATED          *
+                    ********************************
+                    -->
                     <p:outputLabel value="Date Created:" for="dateCreated" />
                     <p:datePicker id="dateCreated" value="#{travelNoteController.selected.dateCreated}" pattern="yyyy/MM/dd"
-                                  required="true" />
+                                  required="true" requiredMessage="Please enter the Longitude value."/>
 
                 </p:panelGrid>
 

@@ -1,7 +1,13 @@
 package edu.vt.hotelSearch;
 
+// this class is used to create object to store the result from Hotel API search.
 public class SearchedHotel {
 
+  /*
+    ==========================================================
+    Instance variables representing the attributes of a weather.
+    ==========================================================
+     */
   private String name;
 
   private String caption;
@@ -12,6 +18,11 @@ public class SearchedHotel {
 
   private String longitude;
 
+  /*
+    =========================
+    Getter and Setter Methods
+    =========================
+     */
   public String getName() {
     return name;
   }
@@ -52,6 +63,7 @@ public class SearchedHotel {
     this.longitude = longitude;
   }
 
+  //constructor
   public SearchedHotel(String name, String caption, String redirtectPage, String latitude, String longitude) {
     this.name = name;
     this.caption = caption;

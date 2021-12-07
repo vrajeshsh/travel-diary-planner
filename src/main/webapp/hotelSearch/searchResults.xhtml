@@ -44,11 +44,26 @@
                             <h:panelGrid columns="1" style="width:100%"
                                          columnClasses="item">
 
+                                <!--
+                                ********************************
+                                *        Hotel Name        *
+                                ********************************
+                                -->
                                 <h:outputText value="#{aHotel.name}" style="float:left; font-weight: bold"/>
                                 <br/>
+                                <!--
+                                ********************************
+                                *        Hotel Caption        *
+                                ********************************
+                                -->
                                 <h:outputText value="#{aHotel.caption}" escape="false" style="float:left"/>
                                 <br/>
-                                <a href="http://maps.google.com/maps?q=#{aHotel.latitude},#{aHotel.longitude}">Google map link </a>
+                                <!--
+                                ********************************
+                                *        Hotel Google map link        *
+                                ********************************
+                                -->
+                                <a href="http://maps.google.com/maps?q=#{aHotel.latitude},#{aHotel.longitude}" target="_blank">Google map link </a>
                             </h:panelGrid>
                         </p:panel>
                     </p:dataViewListItem>
@@ -59,11 +74,26 @@
 
                             <h:panelGrid columns="1" style="width:100%"
                                          columnClasses="item">
+                                <!--
+                                ********************************
+                                *        Hotel Name        *
+                                ********************************
+                                -->
                                 <h:outputText value="#{aHotel.name}" style="float:left; font-weight: bold"/>
                                 <br/>
+                                <!--
+                                ********************************
+                                *        Hotel Caption        *
+                                ********************************
+                                -->
                                 <h:outputText value="#{aHotel.caption}" escape="false" style="float:left"/>
                                 <br/>
-                                <a href="http://maps.google.com/maps?q=#{aHotel.latitude},#{aHotel.longitude}">Google map link </a>
+                                <!--
+                                ********************************
+                                *        Hotel Google Maps Link        *
+                                ********************************
+                                -->
+                                <a href="http://maps.google.com/maps?q=#{aHotel.latitude},#{aHotel.longitude}" target="_blank">Google map link </a>
                             </h:panelGrid>
                         </p:panel>
                     </p:dataViewGridItem>

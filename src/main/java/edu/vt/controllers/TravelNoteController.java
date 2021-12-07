@@ -9,7 +9,6 @@ import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.UserFileFacade;
 import edu.vt.globals.Constants;
 import edu.vt.globals.Methods;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -100,7 +99,6 @@ public class TravelNoteController implements Serializable {
         selected = null;
         return "/travelNote/ListUserTravelNotes?faces-redirect=true";
     }
-
 
     /*
      ================
@@ -283,7 +281,7 @@ public class TravelNoteController implements Serializable {
 
     /*
     ***********************************************
-    Delete all of the files that belong to the User
+    Delete all the files that belong to the User
     object whose database primary key is primaryKey
     ***********************************************
      */
