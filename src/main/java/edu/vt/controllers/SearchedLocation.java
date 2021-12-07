@@ -12,16 +12,6 @@ public class SearchedLocation {
      */
 
     private String date;
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-
     private String maxtemp_c;
     private String maxtemp_f;
     private String mintemp_c;
@@ -34,6 +24,20 @@ public class SearchedLocation {
     private String foreIcon;
     private String sunrise;
     private String sunset;
+
+    /*
+    =========================
+    Getter and Setter Methods
+    =========================
+     */
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getForeIcon() {
         return foreIcon;
@@ -131,8 +135,7 @@ public class SearchedLocation {
         this.daily_will_it_snow = daily_will_it_snow;
     }
 
-
-
+    //constructor
     public SearchedLocation(String date,String maxtemp_c, String maxtemp_f, String mintemp_c, String mintemp_f, String avghumidity, String totalprecip_mm, String maxwind_mph, String daily_will_it_rain, String daily_will_it_snow, String foreIcon, String sunrise, String sunset) {
         this.date = date;
         this.maxtemp_c = maxtemp_c;
@@ -148,11 +151,4 @@ public class SearchedLocation {
         this.sunrise = sunrise;
         this.sunset = sunset;
     }
-
-      /*
-    ========================================================
-    Getter and Setter methods for the attributes of a weather.
-    ========================================================
-     */
-
 }
