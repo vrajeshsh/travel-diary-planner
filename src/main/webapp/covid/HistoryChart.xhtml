@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Sai Venkat on 2021.12.04
+  - Copyright © 2021 Sai Venkat Banda. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <!-- Make the covid chart to be horizontally scrollable on mobile devices -->
+        <div align="center" style="overflow-x:auto;">
+
+            <h:form id="CovidChartForm">
+                <!--
+                ===========
+                Covid Chart
+                ===========
+                -->
+                <h1>
+                    #{covidDetailsByCountryController.countryName.toUpperCase()} Covid History Chart
+                </h1>
+
+                <p:chart id="covidHistoryChart" type="bar" model="#{covidDetailsByCountryController.covidChart}"
+                         style="height:500px;width:900px"/>
+
+                <br /><br /><br /><br /><br /><br />
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2">
+
+                        <p:outputLabel value="Enter country name for which to Display Covid History" for="countryName" />
+                        <p:selectOneMenu id="countryName" value="#{covidDetailsByCountryController.countryName}">
+                            <!--
+                            List of countries is displayed for the user to select one.
+                            The first state postal code AK is selected as the default.
+                            -->
+                            <f:selectItems value="#{countriesController.getListOfCountries()}" var="countryName"
+                                           itemLabel="#{countryName}" itemValue="#{countryName}" />
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="Option Type" for="status" />
+                        <p:selectOneMenu id="status" value="#{covidDetailsByCountryController.status}" required="true">
+                            <!--
+                            List of staus is displayed for the user to select one.
+                            The first status is selected as the default.
+                            -->
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem itemLabel="New Cases" itemValue="New Cases"/>
+                            <f:selectItem itemLabel="Deaths" itemValue="Deaths"/>
+                        </p:selectOneMenu>
+
+
+
+                        <p:outputLabel value="History From (MM/dd/yyyy):" for="dateFrom"/>
+                        <p:datePicker id="dateFrom" value="#{covidDetailsByCountryController.fromDate}" pattern="MM/dd/yyyy" required="true"/>
+
+                        <p:outputLabel value="History Till (MM/dd/yyyy):" for="dateTill"/>
+                        <p:datePicker id="dateTill" value="#{covidDetailsByCountryController.toDate}" pattern="MM/dd/yyyy" required="true"/>
+
+
+                    </p:panelGrid>
+                </h:panelGroup>
+
+                <br /><br />
+
+                <p:commandButton id="update" value="Display Covid Hisotry" icon="fas fa-chart-bar" styleClass="rounded-button"
+                                 ajax="false" action="#{covidDetailsByCountryController.displayCovidHistoryChart}"/>
+                &nbsp;
+            </h:form>
+
+        </div>
+        <br /><br />
+
+        <!--
+        ********************************************************************************************
+        PrimeFaces p:chart uses jqPlot (http://www.jqplot.com/) JavaScript library to create charts.
+
+        This JavaScript function barChartExtender() is created as an Extender and set in
+        covidDetailsByCountryController.java with
+
+        covidChart.setExtender("barChartExtender");
+
+        for use to style the chart using the jqPlot properties listed at
+        (http://www.jqplot.com/docs/files/jqplot-core-js.html)
+        ********************************************************************************************
+        -->
+        <script type="text/javascript">
+            function barChartExtender() {
+                // this     ==> chart widget instance
+                // this.cfg ==> options
+
+                this.cfg.gridPadding = {
+                    top: 20, bottom: 50
+                };
+                this.cfg.seriesDefaults.rendererOptions = {
+                    barWidth: 25
+                };
+                this.cfg.legend = {
+                    show: true,
+                    placement: 'inside' // versus 'outside' of the chart
+                };
+                // Y Axis Styling
+                this.cfg.axes.yaxis.labelOptions = {
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontSize: '14pt',
+                    textColor: '#006400'  // Dark Green
+                };
+                this.cfg.axes.yaxis.tickOptions = {
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontSize: '10pt',
+                    textColor: '#000000'  // Black
+                };
+                // X Axis Styling
+                this.cfg.axes.xaxis.labelOptions = {
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontSize: '14pt',
+                    textColor: '#006400'  // Dark Green
+                };
+                this.cfg.axes.xaxis.tickOptions = {
+                    fontFamily: 'Arial, Helvetica, sans-serif',
+                    fontSize: '8pt',
+                    angle: -30, // Slant the day label 30 degrees
+                    textColor: '#000000'  // Black
+                };
+            }
+        </script>
+    </ui:define>
+
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
+
