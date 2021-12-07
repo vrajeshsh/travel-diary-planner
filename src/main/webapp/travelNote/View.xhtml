@@ -30,14 +30,26 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2"
                                  rendered="#{travelNoteController.selected != null}">
-
+                        <!--
+                        ********************************
+                        *          TITLE          *
+                        ********************************
+                        -->
                         <h:outputLabel value="Title:" for="title" />
                         <h:outputText id="title" value="#{travelNoteController.selected.title}"   />
-
+                        <!--
+                        ********************************
+                        *          NOTE          *
+                        ********************************
+                        -->
                         <!--                        video title-->
                         <h:outputText value="Note:"/>
                         <h:outputText value="#{travelNoteController.selected.text}" style="width: 300px; height: 200px"/>
-
+                        <!--
+                        ********************************
+                        *          DATE CREATED          *
+                        ********************************
+                        -->
                         <!--                        video publication date-->
                         <h:outputText value="Date Created:"/>
                         <h:outputText value="#{travelNoteController.selected.dateCreated.toString().substring(0,10).replace('-','/')}"/>
@@ -45,6 +57,13 @@
                     </p:panelGrid>
                 </h:panelGroup>
                 <br />
+
+                <!--
+                ********************************
+                *       TRAVEL NOTE IAMGE DATA LIST      *
+                ********************************
+                -->
+
                 <p:dataTable id="datalist"
                              value="#{userFileController.getListOfUserTravelNoteFiles(travelNoteController.selected.id)}"
                              var="aUserFile"
@@ -56,7 +75,7 @@
 
                     <!--
                     ********************************
-                    *       USER PHOTO column      *
+                    *       TRAVEL NOTE IMAGE      *
                     ********************************
                     -->
                     <p:column headerText="Travel Note Images" style="width:100px;">
