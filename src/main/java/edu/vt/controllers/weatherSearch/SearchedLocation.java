@@ -2,7 +2,7 @@
  * Created by Vrajesh Shah on 2021.10.25
  * Copyright © 2021 Vrajesh Shah. All rights reserved.
  */
-package edu.vt.controllers;
+package edu.vt.controllers.weatherSearch;
 
 public class SearchedLocation {
     /*

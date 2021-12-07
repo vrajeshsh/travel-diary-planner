@@ -2,9 +2,8 @@
  * Created by Vrajesh Shah on 2021.10.23
  * Copyright © 2021 Vrajesh Shah. All rights reserved.
  */
-package edu.vt.controllers;
+package edu.vt.controllers.weatherSearch;
 
-import edu.vt.globals.Methods;
 import org.primefaces.shaded.json.JSONArray;
 import org.primefaces.shaded.json.JSONObject;
 
