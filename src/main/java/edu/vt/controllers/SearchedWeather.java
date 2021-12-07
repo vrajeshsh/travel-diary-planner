@@ -4,12 +4,39 @@
  */
 package edu.vt.controllers;
 
+// class used for storing weather object during wetaher search
 public class SearchedWeather {
     /*
     ==========================================================
     Instance variables representing the attributes of a weather.
     ==========================================================
      */
+
+    private String date;
+    private String name;
+    private String country;
+    private String temp_c;
+    private String temp_f;
+    private String text;
+    private String icon;
+    private String humidity;
+    private String precip_mm;
+    private String wind_mph;
+    private String localtime;
+
+    /*
+     ========================================================
+     Getter and Setter methods for the attributes of a weather.
+     ========================================================
+    */
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getPrecip_mm() {
         return precip_mm;
@@ -26,27 +53,6 @@ public class SearchedWeather {
     public void setWind_mph(String wind_mph) {
         this.wind_mph = wind_mph;
     }
-    private String date;
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    private String name;
-    private String country;
-    private String temp_c;
-    private String temp_f;
-    private String text;
-    private String icon;
-    private String humidity;
-    private String precip_mm;
-    private String wind_mph;
-    private String localtime;
-
 
     public String getLocaltime() {
         return localtime;
@@ -63,13 +69,6 @@ public class SearchedWeather {
     public void setHumidity(String humidity) {
         this.humidity = humidity;
     }
-/*
-    ===================================================
-    Class constructor for instantiating a Searchedweather
-    object to represent a particular weather.
-    ===================================================
-     */
-
 
     public String getText() {
         return text;
@@ -86,27 +85,6 @@ public class SearchedWeather {
     public void setIcon(String icon) {
         this.icon = icon;
     }
-
-    public SearchedWeather(String name, String country, String temp_c, String temp_f, String text, String icon, String humidity, String wind_mph, String precip_mm, String localtime) {
-
-        this.name = name;
-        this.country = country;
-        this.temp_c = temp_c;
-        this.temp_f = temp_f;
-        this.text = text;
-        this.icon = icon;
-        this.humidity = humidity;
-        this.wind_mph = wind_mph;
-        this.precip_mm = precip_mm;
-        this.localtime = localtime;
-
-    }
-
-      /*
-    ========================================================
-    Getter and Setter methods for the attributes of a weather.
-    ========================================================
-     */
 
     public String getName() {
         return name;
@@ -138,5 +116,27 @@ public class SearchedWeather {
 
     public void setTemp_f(String temp_f) {
         this.temp_f = temp_f;
+    }
+
+    /*
+    ===================================================
+    Class constructor for instantiating a SearchedWeather
+    object to represent a particular weather.
+    ===================================================
+     */
+
+    public SearchedWeather(String name, String country, String temp_c, String temp_f, String text, String icon, String humidity, String wind_mph, String precip_mm, String localtime) {
+
+        this.name = name;
+        this.country = country;
+        this.temp_c = temp_c;
+        this.temp_f = temp_f;
+        this.text = text;
+        this.icon = icon;
+        this.humidity = humidity;
+        this.wind_mph = wind_mph;
+        this.precip_mm = precip_mm;
+        this.localtime = localtime;
+
     }
 }
