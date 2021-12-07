@@ -82,6 +82,7 @@ siteTemplate for the entire site, achieving great maintainability.
                             </c:if>
 
                             <p:menuitem value="Search Hotels" onclick="PF('HotelSearchDialog').show();return false;" icon="fas fa-search"/>
+                            <p:menuitem value="Search Weather" onclick="PF('WeatherSearchDialog').show();return false;" icon="fas fa-search"/>
                         </p:menu>
                     </div>
                 </td>
@@ -135,5 +136,6 @@ siteTemplate for the entire site, achieving great maintainability.
         </h:form>
 
     </p:dialog>
+    <ui:include src="/search/ApiSearch.xhtml"></ui:include>
 </ui:composition>
 </html>
