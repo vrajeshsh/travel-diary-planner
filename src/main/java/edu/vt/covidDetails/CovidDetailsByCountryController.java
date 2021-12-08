@@ -1,3 +1,7 @@
+/*
+ * Created by Sai Venkat on 2021.11.25
+ * Copyright © 2021 Sai Venkat Banda. All rights reserved.
+ */
 package edu.vt.covidDetails;
 
 import edu.vt.globals.Methods;
@@ -25,6 +29,12 @@ import static java.lang.Math.min;
 @SessionScoped
 public class CovidDetailsByCountryController implements Serializable {
 
+  /*
+    ===============================
+    Instance Variables (Properties)
+    ===============================
+     */
+
   private BarChartModel covidChart;
   private List<CovidDetailsByCountry> covidDetailsByCountrywithDateList;
 
@@ -51,6 +61,12 @@ public class CovidDetailsByCountryController implements Serializable {
     obtainCountryCovidData();
     createCountryCovidModel();
   }
+
+  /*
+    =========================
+    Getter and Setter Methods
+    =========================
+     */
 
   public BarChartModel getCovidChart() {
     return covidChart;

@@ -1,16 +1,32 @@
+/*
+ * Created by Sai Venkat on 2021.11.25
+ * Copyright © 2021 Sai Venkat Banda. All rights reserved.
+ */
 package edu.vt.covidDetails;
 
+// country class for performing COVID search
 public class Country {
+  /*
+    ===============================
+    Instance Variables (Properties)
+    ===============================
+     */
   String name;
   String slug;
   String ISO2;
 
+  //constructor
   public Country(String name, String slug, String ISO2) {
     this.name = name;
     this.slug = slug;
     this.ISO2 = ISO2;
   }
 
+  /*
+   =========================
+   Getter and Setter Methods
+   =========================
+    */
   public String getName() {
     return name;
   }

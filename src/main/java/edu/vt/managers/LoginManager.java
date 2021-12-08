@@ -1,10 +1,17 @@
+/*
+ * Created by Vrajesh Shah on 2021.11.25
+ * Copyright © 2021 Vrajesh Shah. All rights reserved.
+ */
 package edu.vt.managers;
 
 import edu.vt.globals.Password;
 import edu.vt.EntityBeans.User;
 import edu.vt.FacadeBeans.UserFacade;
 import edu.vt.globals.Methods;
-
+/*
+ * Created by Sai Venkat on 2021.11.25
+ * Copyright © 2021 Sai Venkat Banda. All rights reserved.
+ */
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;

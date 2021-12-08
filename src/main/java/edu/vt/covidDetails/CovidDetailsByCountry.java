@@ -1,9 +1,19 @@
+/*
+ * Created by Sai Venkat on 2021.11.25
+ * Copyright © 2021 Sai Venkat Banda. All rights reserved.
+ */
 package edu.vt.covidDetails;
 
 import java.util.Date;
 
 //{"ID":"b9560105-1f28-4052-9ab9-d127936dd7b3","Country":"South Africa","CountryCode":"ZA","Province":"","City":"","CityCode":"","Lat":"-30.56","Lon":"22.94","Confirmed":3038075,"Deaths":89975,"Recovered":0,"Active":2948100,"Date":"2021-12-07T00:00:00Z"}
+// CovidDetailsByCountry JAVA class for performing COVID API search
 public class CovidDetailsByCountry {
+  /*
+  ===============================
+  Instance Variables (Properties)
+  ===============================
+  */
   String name;
   String code;
 
@@ -17,6 +27,11 @@ public class CovidDetailsByCountry {
 
   Date date;
 
+  /*
+  =========================
+  Constructor
+  =========================
+  */
   public CovidDetailsByCountry(String name, String code, Double lat, Double lon, Integer confirmed, Integer deaths, Integer recovered, Integer active, Date date) {
     this.name = name;
     this.code = code;
@@ -28,7 +43,11 @@ public class CovidDetailsByCountry {
     this.active = active;
     this.date = date;
   }
-
+  /*
+     =========================
+     Getter and Setter Methods
+     =========================
+      */
   public String getName() {
     return name;
   }

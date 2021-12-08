@@ -1,3 +1,7 @@
+/*
+ * Created by Sai Venkat on 2021.10.25
+ * Copyright © 2021 Sai Venkat Banda. All rights reserved.
+ */
 package edu.vt.hotelSearch;
 
 // this class is used to create object to store the result from Hotel API search.

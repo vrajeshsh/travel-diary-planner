@@ -1,5 +1,7 @@
-
-
+/*
+ * Created by Arpit Thool on 2021.10.15
+ * Copyright © 2021 Arpit Thool. All rights reserved.
+ */
 package edu.vt.galleria;
 
 import org.primefaces.model.ResponsiveOption;
