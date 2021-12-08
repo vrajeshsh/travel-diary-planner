@@ -62,4 +62,61 @@ public class TravelNoteFacade extends AbstractFacade<TravelNote> {
                 .setParameter("userId", signedInUser)
                 .getResultList();
     }
+
+    /*
+     ***************************
+     *   Search Query Type 1   *
+     ***************************
+     */
+
+    /*
+    -----------------------------
+    Search Category: Travel Note title
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note title contains the searchString entered by the user.
+    public List<TravelNote> titleQuery(String searchString, User signedInUserID) {
+        // Place the % wildcard before and after the search string to search for it anywhere in the Travel Note name
+        searchString = "%" + searchString + "%";
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.title LIKE :searchString ) AND t.userId = :userId")
+                .setParameter("userId", signedInUserID)
+                .setParameter("searchString", searchString)
+                .getResultList();
+    }
+
+    /*
+    -----------------------------
+    Search Category: Travel Note note
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note text contains the searchString entered by the user.
+    public List<TravelNote> noteQuery(String searchString, User signedInUserID) {
+        // Place the % wildcard before and after the search string to search for it anywhere in the Travel Note name
+        searchString = "%" + searchString + "%";
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.text LIKE :searchString ) AND t.userId = :userId")
+                .setParameter("userId", signedInUserID)
+                .setParameter("searchString", searchString)
+                .getResultList();
+    }
+
+    /*
+    -----------------------------
+    Search Category: Travel Note All
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note title or text contains the searchString entered by the user.
+    public List<TravelNote> allQuery(String searchString, User signedInUserID) {
+        // Place the % wildcard before and after the search string to search for it anywhere in the Travel Note name
+        searchString = "%" + searchString + "%";
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.title LIKE :searchString OR t.text LIKE :searchString ) AND t.userId = :userId")
+                .setParameter("searchString", searchString)
+                .setParameter("userId", signedInUserID)
+                .getResultList();
+    }
 }

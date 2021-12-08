@@ -49,6 +49,18 @@
                 <div style="background: aliceblue ">
                     <h:outputText value="#{travelNoteController.selected.text}" />
                 </div>
+
+                <!--
+                        ********************************
+                        *          Location          *
+                        ********************************
+                        -->
+                <div>
+                    <h:outputText value="Location:" style="font-style: italic"/>
+                </div>
+                <div style="background: aliceblue ">
+                    <a href="#{travelNoteController.selected.getGoogleMapsLink()}" target="_blank">google maps link</a>
+                </div>
                         <!--
                         ********************************
                         *          DATE CREATED          *

@@ -1,6 +1,6 @@
 /*
- * Created by Arpit Thool on 2021.10.23
- * Copyright © 2021 Arpit Thool. All rights reserved.
+ * Created by Vrajesh Shah on 2021.10.23
+ * Copyright © 2021 Vrajesh Shah. All rights reserved.
  */
 package edu.vt.weatherSearch;
 

@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.el.MethodExpression;
 import javax.faces.event.ActionListener;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -31,6 +32,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Named("travelNoteController")
 @SessionScoped
@@ -57,6 +59,14 @@ public class TravelNoteController implements Serializable {
 
     private List<UserFile> listOfTravelNoteFiles = null;
 
+    private String searchString = null;
+
+    private String searchField = null;
+
+    private Integer searchType;
+
+    private List<TravelNote> searchItems = null;
+
     //  indicating if travel note data changed or not
     private Boolean travelNoteDataChanged;
     /*
@@ -64,6 +74,62 @@ public class TravelNoteController implements Serializable {
     Getter and Setter Methods
     =========================
      */
+
+    public Integer getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(Integer searchType) {
+        this.searchType = searchType;
+    }
+
+    public void setSearchItems(List<TravelNote> searchItems) {
+        this.searchItems = searchItems;
+    }
+
+    public String getSearchField() {
+        return searchField;
+    }
+
+    public void setSearchField(String searchField) {
+        this.searchField = searchField;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public TravelNoteFacade getTravelNoteFacade() {
+        return travelNoteFacade;
+    }
+
+    public void setTravelNoteFacade(TravelNoteFacade travelNoteFacade) {
+        this.travelNoteFacade = travelNoteFacade;
+    }
+
+    public UserFileFacade getUserFileFacade() {
+        return userFileFacade;
+    }
+
+    public void setUserFileFacade(UserFileFacade userFileFacade) {
+        this.userFileFacade = userFileFacade;
+    }
+
+    public void setListOfTravelNoteFiles(List<UserFile> listOfTravelNoteFiles) {
+        this.listOfTravelNoteFiles = listOfTravelNoteFiles;
+    }
+
+    public Boolean getTravelNoteDataChanged() {
+        return travelNoteDataChanged;
+    }
+
+    public void setTravelNoteDataChanged(Boolean travelNoteDataChanged) {
+        this.travelNoteDataChanged = travelNoteDataChanged;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
 
     public TravelNote getSelected() {
         return selected;
@@ -318,6 +384,86 @@ public class TravelNoteController implements Serializable {
                             "See: " + ex.getMessage());
                 }
             });
+        }
+    }
+
+    /*
+     ******************************************
+     *   Display the Search Results JSF Page  *
+     ******************************************
+     */
+    public String search(Integer type) {
+
+        // Set search type given as input parameter
+        searchType = type;
+
+        // Unselect previously selected country if any before showing the search results
+        selected = null;
+
+        // Invalidate list of search items to trigger re-query.
+        searchItems = null;
+
+        return "/databaseSearch/DatabaseSearchResults?faces-redirect=true";
+    }
+
+    /*
+     ****************************************************************************************************
+     *   Return the list of object references of all those Travel notes that satisfy the search criteria   *
+     ****************************************************************************************************
+     */
+    // This is the Getter method for the instance variable searchItems
+    public List<TravelNote> getSearchItems() {
+
+        User signedInUser = this.getSignedInUserID();
+
+        if(signedInUser == null){
+            Methods.showMessage("Fatal Error", "Search Type is Out of Range!",
+                    "");
+            return null;
+        }
+
+        if (searchItems == null) {
+            switch (searchType) {
+                case 1: // Search Type 1
+                    switch (searchField) {
+                        case "title":
+                            // Return the list of object references of all those Travel Notes where
+                            // title contains the searchString entered by the user.
+                            searchItems = travelNoteFacade.titleQuery(searchString, signedInUser);
+                            break;
+                        case "note":
+                            // Return the list of object references of all those Travel Notes where
+                            //  text contains the searchString entered by the user.
+                            searchItems = travelNoteFacade.noteQuery(searchString, signedInUser);
+                            break;
+                        default:
+                            // Return the list of object references of all those Travel Notes where
+                            // title or text contains the searchString entered by the user.
+                            searchItems = travelNoteFacade.allQuery(searchString, signedInUser);
+                    }
+                    break;
+                default:
+                    Methods.showMessage("Fatal Error", "Search Type is Out of Range!",
+                            "");
+            }
+        }
+        return searchItems;
+    }
+
+    private User getSignedInUserID(){
+        try{
+            /*
+            'user', the object reference of the signed-in user, was put into the SessionMap
+            in the initializeSessionMap() method in LoginManager upon user's sign in.
+             */
+            Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            User signedInUser = (User) sessionMap.get("user");
+
+            // Obtain the database primary key of the signedInUser object
+            return signedInUser;
+        }
+        catch (Exception e){
+            return null;
         }
     }
 

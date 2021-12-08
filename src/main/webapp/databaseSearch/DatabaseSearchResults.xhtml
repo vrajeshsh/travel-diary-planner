@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Osman Balci on 2021.7.16
+  - Copyright © 2021 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Database Search Results" />
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <!-- In case of JSF validation error, set 'selected' to null in travelNoteController -->
+        <c:if test="#{facesContext.validationFailed}">
+            ${travelNoteController.unselect()}
+        </c:if>
+
+        <!-- Set 'selected' to null in travelNoteController when the user refreshes / reloads this JSF page -->
+        <f:metadata>
+            <f:viewAction action="#{travelNoteController.unselect()}" rendered="#{facesContext.postback}" />
+        </f:metadata>
+
+        <div align="center">
+            <h:form id="TravelNoteListForm">
+                <p:panel header="Database Search Results">
+                    <p:dataTable id="datalist"
+                                 value="#{travelNoteController.searchItems}"
+                                 var="aTravelNote"
+                                 widgetVar="countriesDataTable"
+                                 selectionMode="single"
+                                 selection="#{travelNoteController.selected}"
+                                 reflow="true"
+                                 showGridlines="true"
+                                 paginator="true"
+                                 rowKey="#{aTravelNote.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="5,10,20,30,50,70,90">
+
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+
+                        <!--
+                        ********************************
+                        *        Travel Note Title column        *
+                        ********************************
+                        -->
+                        <p:column sortBy="#{aTravelNote.title}"
+                                  filterBy="#{aTravelNote.title}" filterMatchMode="contains"
+                                  headerText="Title" style="width:80px;">
+                            <div align="center"><h:outputText value="#{aTravelNote.title}"/></div>
+                        </p:column>
+
+                        <!--
+                        ********************************
+                        *        Travel Note text column      *
+                        ********************************
+                        -->
+                        <p:column sortBy="#{aTravelNote.text}"
+                                  filterBy="#{aTravelNote.text}" filterMatchMode="contains"
+                                  headerText="Note" >
+                            <h:outputText value="#{aTravelNote.text}"/>
+                        </p:column>
+
+                        <!--
+                        ********************************
+                        *        Travel Note location link      *
+                        ********************************
+                        -->
+                        <p:column
+                                headerText="Location" style="width: 80px">
+                            <a href="#{aTravelNote.googleMapsLink}" target="_blank">google maps link</a>
+                        </p:column>
+
+                        <!--
+                         *********************
+                         *    Public Video date   *
+                         *********************
+                         -->
+                        <p:column headerText="Date" sortBy="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}"
+                                  filterBy="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}" filterMatchMode="contains"
+                                  style="vertical-align: top; width: 100px;">
+                            <h:outputText value="#{aTravelNote.dateCreated.toString().substring(0,10).replace('-','/')}"/>
+                        </p:column>
+                        <!--
+                        *************************
+                        *   Data Table Footer   *
+                        *************************
+                        -->
+                        <f:facet name="footer">
+                            <div align="center">
+                                <!-- VIEW button: id is used since it is referenced to be activated or deactivated -->
+                                <p:commandButton id="viewButton" value="View" icon="fas fa-eye" styleClass="rounded-button"
+                                                 update=":TravelNoteViewDlg" oncomplete="PF('TravelNoteViewDialog').show()"
+                                                 disabled="#{empty travelNoteController.selected}"/>
+                                &nbsp;
+                                <!-- GO BACK button -->
+                                <p:button id="backButton" icon="fas fa-arrow-left" styleClass="ui-button-outlined"
+                                          outcome="/databaseSearch/DatabaseSearch" value="Go Back"/>
+                            </div>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+
+        <!--
+        Clicking the View button displays the included
+        View.xhtml file in a dialog window on top of this page.
+        -->
+        <ui:include src="/travelNote/View.xhtml"/>
+
+    </ui:define>
+</ui:composition>
+</html>

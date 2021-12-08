@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Arpit Thool on 2021.7.16
+  - Copyright © 2021 Arpit Thool. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Database Search" />
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <h:form id="DatabaseSearchForm">
+            <div align="center">
+                <h:graphicImage value="#{resource['images:searchDatabase.png']}"
+                                style="width: 150px" />
+                <h1>Database Search</h1>
+                <br />
+                <table width="80%" border="1" align="center" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <th width="60" nowrap="nowrap" scope="col">Type</th>
+                        <th scope="col">Description</th>
+                        <th width="200" scope="col">Search</th>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">1</td>
+                        <td align="center">Search travel Note title, note individually or search in each</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 1" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":DBSearchDlg1" oncomplete="PF('DBSearchDialog1').show()" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br />
+            </div>
+        </h:form>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 1 Search
+        **************************************
+        -->
+        <p:dialog id="DBSearchDlg1" header="Search Travel Diary Database" widgetVar="DBSearchDialog1"
+                  modal="true" position="center" appendTo="@(body)"
+                  showEffect="slide" hideEffect="fade" responsive="true" >
+
+            <h:form id="TravelNoteSearchForm1">
+                <p:panel>
+                    <h:panelGrid columns="4">
+                        <h:outputLabel value="Search: "/>
+                        <!-- Search string is entered here. -->
+                        <p:inputText id="searchString" value="#{travelNoteController.searchString}"
+                                     required="true" requiredMessage="Please enter a search string!"
+                                     placeholder="Enter search string" >
+                            <f:validateLength minimum="1" />
+                        </p:inputText>
+                        &nbsp;
+                        <!-- Search category is selected here. -->
+                        <p:selectOneMenu id="searchField" value="#{travelNoteController.searchField}"
+                                         required="true" requiredMessage="Please select a category!" >
+
+                            <f:selectItem itemLabel="Select Category" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="All" itemValue="all"/>
+                            <f:selectItem itemLabel="Title" itemValue="title"/>
+                            <f:selectItem itemLabel="Note" itemValue="text"/>
+
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <br /><br />
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{travelNoteController.search(1)}" />
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('DBSearchDialog1').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+</html>
