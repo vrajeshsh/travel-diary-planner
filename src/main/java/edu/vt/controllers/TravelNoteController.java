@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +61,11 @@ public class TravelNoteController implements Serializable {
     private List<UserFile> listOfTravelNoteFiles = null;
 
     private String searchString = null;
+    private String searchString2 = null;
 
     private String searchField = null;
+
+    private Date searchDate;
 
     private Integer searchType;
 
@@ -74,6 +78,22 @@ public class TravelNoteController implements Serializable {
     Getter and Setter Methods
     =========================
      */
+
+    public String getSearchString2() {
+        return searchString2;
+    }
+
+    public void setSearchString2(String searchString2) {
+        this.searchString2 = searchString2;
+    }
+
+    public Date getSearchDate() {
+        return searchDate;
+    }
+
+    public void setSearchDate(Date searchDate) {
+        this.searchDate = searchDate;
+    }
 
     public Integer getSearchType() {
         return searchType;
@@ -442,6 +462,18 @@ public class TravelNoteController implements Serializable {
                             searchItems = travelNoteFacade.allQuery(searchString, signedInUser);
                     }
                     break;
+                case 2:
+                    // Return the list of object references of all those Travel Notes where
+                    // date >= the searchString entered by the user.
+                    searchItems = travelNoteFacade.type2SearchQuery(searchString, signedInUser);
+                case 3:
+                    // Return the list of object references of all those Travel Notes where
+                    // date < the searchString entered by the user.
+                    searchItems = travelNoteFacade.type3SearchQuery(searchString, signedInUser);
+                case 4:
+                    // Return the list of object references of all those Travel Notes where
+                    // date < the searchString entered by the user.
+                    searchItems = travelNoteFacade.type4SearchQuery(searchString, searchString2, signedInUser);
                 default:
                     Methods.showMessage("Fatal Error", "Search Type is Out of Range!",
                             "");

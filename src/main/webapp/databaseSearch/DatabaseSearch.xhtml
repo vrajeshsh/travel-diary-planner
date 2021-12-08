@@ -42,6 +42,30 @@
                                              update=":DBSearchDlg1" oncomplete="PF('DBSearchDialog1').show()" />
                         </td>
                     </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">2</td>
+                        <td align="center">Search travel Notes that were created on or after a specific date.</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 2" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":DBSearchDlg2" oncomplete="PF('DBSearchDialog2').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">3</td>
+                        <td align="center">Search travel Notes that were created before a specific date.</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 3" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":DBSearchDlg3" oncomplete="PF('DBSearchDialog3').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">4</td>
+                        <td align="center">Search travel Notes that were created between two dates.</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 4" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":DBSearchDlg4" oncomplete="PF('DBSearchDialog4').show()" />
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <br />
@@ -60,7 +84,7 @@
             <h:form id="TravelNoteSearchForm1">
                 <p:panel>
                     <h:panelGrid columns="4">
-                        <h:outputLabel value="Search: "/>
+                        <p:outputLabel value="Search: "/>
                         <!-- Search string is entered here. -->
                         <p:inputText id="searchString" value="#{travelNoteController.searchString}"
                                      required="true" requiredMessage="Please enter a search string!"
@@ -86,6 +110,121 @@
                             <!-- SUBMIT button -->
                             <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
                                              ajax="false" action="#{travelNoteController.search(1)}" />
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('DBSearchDialog1').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 2 Search
+        **************************************
+        -->
+        <p:dialog id="DBSearchDlg2" header="Search Travel Diary Database" widgetVar="DBSearchDialog2"
+                  modal="true" position="center" appendTo="@(body)"
+                  showEffect="slide" hideEffect="fade" responsive="true" >
+
+            <h:form id="TravelNoteSearchForm2">
+                <p:panel>
+                    <h:panelGrid columns="4">
+                        <p:outputLabel value="Date Created: " for="searchString2"/>
+                        <!-- date is entered here. -->
+                        <p:inputText id="searchString2" value="#{travelNoteController.searchString}"
+                                     required="true" requiredMessage="Date Created is required!"
+                                     placeholder="____-__-__">
+                            <p:tooltip for="searchString2" value="Enter date as yyyy-MM-dd" position="right"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <br /><br />
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{travelNoteController.search(2)}" />
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('DBSearchDialog1').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 3 Search
+        **************************************
+        -->
+        <p:dialog id="DBSearchDlg3" header="Search Travel Diary Database" widgetVar="DBSearchDialog3"
+                  modal="true" position="center" appendTo="@(body)"
+                  showEffect="slide" hideEffect="fade" responsive="true" >
+
+            <h:form id="TravelNoteSearchForm3">
+                <p:panel>
+                    <h:panelGrid columns="4">
+                        <p:outputLabel value="Date Created: " for="searchString3"/>
+                        <!-- date is entered here. -->
+                        <p:inputText id="searchString3" value="#{travelNoteController.searchString}"
+                                     required="true" requiredMessage="Date created is required!"
+                                     placeholder="____-__-__">
+                            <p:tooltip for="searchString3" value="Enter date as yyyy-MM-dd" position="right"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <br /><br />
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{travelNoteController.search(3)}" />
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('DBSearchDialog1').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 3 Search
+        **************************************
+        -->
+        <p:dialog id="DBSearchDlg4" header="Search Travel Diary Database" widgetVar="DBSearchDialog4"
+                  modal="true" position="center" appendTo="@(body)"
+                  showEffect="slide" hideEffect="fade" responsive="true" >
+
+            <h:form id="TravelNoteSearchForm4">
+                <p:panel>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="From Date Created: " for="searchString4"/>
+                        <!--from date is entered here. -->
+                        <p:inputText id="searchString4" value="#{travelNoteController.searchString}"
+                                     required="true" requiredMessage="From-Date created is required!"
+                                     placeholder="____-__-__">
+                            <p:tooltip for="searchString4" value="Enter date as yyyy-MM-dd" position="right"/>
+                        </p:inputText>
+                        <p:outputLabel value="To Date Created: " for="searchString4"/>
+                        <!--to date is entered here. -->
+                        <p:inputText id="searchString4a" value="#{travelNoteController.searchString2}"
+                                     required="true" requiredMessage="To-Date created is required!"
+                                     placeholder="____-__-__">
+                            <p:tooltip for="searchString4a" value="Enter date as yyyy-MM-dd" position="right"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <br /><br />
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{travelNoteController.search(3)}" />
                             &nbsp;
                             <!-- CANCEL button -->
                             <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"

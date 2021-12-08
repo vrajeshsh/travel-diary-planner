@@ -119,4 +119,43 @@ public class TravelNoteFacade extends AbstractFacade<TravelNote> {
                 .setParameter("userId", signedInUserID)
                 .getResultList();
     }
+
+    /*
+    -----------------------------
+    Search Category: Travel Note Date
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note title or text contains the searchString entered by the user.
+    public List<TravelNote> type2SearchQuery(String searchString, User signedInUser) {
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.dateCreated >= '"+searchString+"' ) AND t.userId = "+signedInUser.getId())
+                .getResultList();
+    }
+
+    /*
+    -----------------------------
+    Search Category: Travel Note Date
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note title or text contains the searchString entered by the user.
+    public List<TravelNote> type3SearchQuery(String searchString, User signedInUser) {
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.dateCreated < '"+searchString+"' ) AND t.userId = "+signedInUser.getId())
+                .getResultList();
+    }
+
+    /*
+    -----------------------------
+    Search Category: Travel Note Date
+    -----------------------------
+     */
+    // Searches TravelDiaryPlannerDB where Travel Note title or text contains the searchString entered by the user.
+    public List<TravelNote> type4SearchQuery(String searchString, String searchString2, User signedInUser) {
+        // Conduct the search in a case-insensitive manner and return the results in a list.
+        return getEntityManager().createQuery(
+                        "SELECT t FROM TravelNote t WHERE ( t.dateCreated BETWEEN '"+searchString+"' AND '"+searchString2+"' ) AND t.userId = "+signedInUser.getId())
+                .getResultList();
+    }
 }
