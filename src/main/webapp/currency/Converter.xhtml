@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Arpit Thool on 2021.12.01
+  - Copyright © 2021 Arpit Thool. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Currency Converter" />
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <h:form id="CurrencyConverterForm">
+                <div align="center">
+                    <br />
+                    <h1>Currency Converter</h1>
+                    <br />            
+                    <h:panelGrid columns="2" cellpadding="10" cellspacing="3">
+
+                            <h:outputLabel value="From: " style="font-style: italic" />
+                            <h:selectOneMenu value="#{currencyConverterController.currencyNameWithIdFrom}" > 
+                                <f:selectItems value="#{currencyConverterController.currencyNamesWithIds}" />                                      
+                            </h:selectOneMenu> 
+
+                            <h:outputLabel value="To: " style="font-style: italic" />
+                            <h:selectOneMenu value="#{currencyConverterController.currencyNameWithIdTo}" > 
+                                <f:selectItems value="#{currencyConverterController.currencyNamesWithIds}" />                                      
+                            </h:selectOneMenu> 
+
+                            <h:outputLabel value="Amount: " style="font-style: italic" for="amountField" />
+                            <p:inputText id="amountField" style="width:200px"
+                                         value="#{currencyConverterController.amountToConvert}" 
+                                         placeholder="Enter amount to convert"
+                                         required="true" requiredMessage="Please Enter Amount of Currency to Convert!">
+                                <p:keyFilter for="amountField" mask="money" /> 
+                            </p:inputText>
+
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <br /><br />
+                        <!-- CONVERSION RESULT Display Area -->
+                        <h1><h:outputText id="resultMsg" value="#{currencyConverterController.conversionResult}" /></h1>
+                        <br /><br /><br />
+                        <div align="center">
+                            <!-- CONVERT button -->
+                            <p:commandButton value="Convert" icon="fas fa-exchange-alt" styleClass="rounded-button"
+                                             update="resultMsg,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                             actionListener="#{currencyConverterController.convertCurrency()}" />
+                            &nbsp;
+                            <!-- CLEAR button -->
+                            <p:commandButton value="Clear" icon="fas fa-undo" styleClass="ui-button-outlined"
+                                             ajax="false" immediate="true"
+                                             actionListener="#{currencyConverterController.clear()}" >
+                                <p:resetInput target="CurrencyConverterForm" />
+                            </p:commandButton>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

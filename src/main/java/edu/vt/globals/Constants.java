@@ -122,4 +122,12 @@ public final class Constants {
         "What was your favorite place to visit as a child?"
     };
 
+    /*
+    **************************
+    You are required to obtain your own API key and use it.
+    Register at https://free.currencyconverterapi.com/ to get your own API key
+    **************************
+     */
+    public static final String FREE_CURRENCY_CONVERTER_API_KEY = "1b9b1a7fbc5595bc5890";
+
 }
