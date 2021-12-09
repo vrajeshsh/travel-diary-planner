@@ -141,7 +141,7 @@
                                                  disabled="#{empty travelNoteController.selected}">
 
                                     <p:confirm header="Deletion Confirmation"
-                                               message="Are you sure you want to permanently delete the travel note #{travelNoteController.selected.id} from the database?"/>
+                                               message="Are you sure you want to permanently delete the travel note #{travelNoteController.selected.title} from the database?"/>
                                 </p:commandButton>
 
                                 <p:confirmDialog id="confirmDialogBox" global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">

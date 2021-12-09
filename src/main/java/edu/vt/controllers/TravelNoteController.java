@@ -462,14 +462,6 @@ public class TravelNoteController implements Serializable {
                             searchItems = travelNoteFacade.allQuery(searchString, signedInUser);
                     }
                     break;
-                case 2:
-                    // Return the list of object references of all those Travel Notes where
-                    // date >= the searchString entered by the user.
-                    searchItems = travelNoteFacade.type2SearchQuery(searchString, signedInUser);
-                case 3:
-                    // Return the list of object references of all those Travel Notes where
-                    // date < the searchString entered by the user.
-                    searchItems = travelNoteFacade.type3SearchQuery(searchString, signedInUser);
                 case 4:
                     // Return the list of object references of all those Travel Notes where
                     // date < the searchString entered by the user.
@@ -479,6 +471,9 @@ public class TravelNoteController implements Serializable {
                             "");
             }
         }
+        searchString = "";
+        searchString2 = "";
+        searchField = "";
         return searchItems;
     }
 

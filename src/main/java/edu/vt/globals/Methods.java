@@ -82,7 +82,7 @@ public final class Methods {
      * @param apiURL: API URL to fetch the JSON data file from
      * @return JSON data obtained from the given API URL as String
      */
-    public static String readUrlContent2(String apiURL) throws Exception {
+    public static String readUrlContentForHotels(String apiURL) throws Exception {
         /*
         reader is an object reference pointing to an object instantiated from the BufferedReader class.
         Initially, it is "null" pointing to nothing.
@@ -98,7 +98,7 @@ public final class Methods {
             Map<String, String> headers = new HashMap<>();
 
             headers.put("x-rapidapi-host", "hotels4.p.rapidapi.com");
-            headers.put("x-rapidapi-key", "84454e0b1dmsh56f21d994e2c614p18fb6ejsn40145e1ebe9c");
+            headers.put("x-rapidapi-key", "fa82022caemsh8901d7b8159fb44p13f392jsnefc9991792d4");
             headers.put("Host", "hotels4.p.rapidapi.com");
 
             for (String headerKey : headers.keySet()) {

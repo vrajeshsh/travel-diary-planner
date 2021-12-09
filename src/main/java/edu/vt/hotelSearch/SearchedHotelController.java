@@ -43,7 +43,7 @@ public class SearchedHotelController implements Serializable {
 
       String searchHotelsUrl = "https://hotels4.p.rapidapi.com/locations/v2/search?query="+ searchQuery + "&locale=en_US&currency=USD";
 
-      String searchResultsData = Methods.readUrlContent2(searchHotelsUrl);
+      String searchResultsData = Methods.readUrlContentForHotels(searchHotelsUrl);
 
       // Instantiate a JSON object from the JSON data obtained
       JSONObject resultsJsonObject = new JSONObject(searchResultsData);

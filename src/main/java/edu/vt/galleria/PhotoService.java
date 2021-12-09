@@ -42,11 +42,11 @@ public class PhotoService {
         listOfPhotos.add(new Photo("/resources/images/slider/photo6.jpg", "/resources/images/slider/photo6.jpg",
                 "Description for Photo 6", "Tag the location to your travel notes."));
         listOfPhotos.add(new Photo("/resources/images/slider/photo7.jpg", "/resources/images/slider/photo7.jpg",
-                "Description for Photo 7", "Your personal travel diary."));
+                "Description for Photo 7", "Use the currency converter when you are on the go!"));
         listOfPhotos.add(new Photo("/resources/images/slider/photo8.jpg", "/resources/images/slider/photo8.jpg",
                 "Description for Photo 8", "See future weather predictions to plan your trip accordingly."));
         listOfPhotos.add(new Photo("/resources/images/slider/photo9.jpg", "/resources/images/slider/photo9.jpg",
-                "Description for Photo 9", "Create an account right and start recording your travels!"));
+                "Description for Photo 9", "Search the COVID-19 statistics in different countries and then take plan your trip."));
         listOfPhotos.add(new Photo("/resources/images/slider/photo10.jpg", "/resources/images/slider/photo10.jpg",
                 "Description for Photo 10", "Store files just like a Cloud Storage."));
         listOfPhotos.add(new Photo("/resources/images/slider/photo11.jpg", "/resources/images/slider/photo11.jpg",

@@ -35,11 +35,11 @@ public final class Constants {
 
     // Unix (macOS) or Linux
 
-    public static final String FILES_ABSOLUTE_PATH  = "/home/arpit/DocRoot/CloudStorage/FileStorage/";
-    public static final String PHOTOS_ABSOLUTE_PATH = "/home/arpit/DocRoot/CloudStorage/PhotoStorage/";
-//
-//    public static final String FILES_ABSOLUTE_PATH  = "/opt/wildfly/DocRoot/CloudStorage/FileStorage/";
-//    public static final String PHOTOS_ABSOLUTE_PATH = "/opt/wildfly/DocRoot/CloudStorage/PhotoStorage/";
+//    public static final String FILES_ABSOLUTE_PATH  = "/home/arpit/DocRoot/CloudStorage/FileStorage/";
+//    public static final String PHOTOS_ABSOLUTE_PATH = "/home/arpit/DocRoot/CloudStorage/PhotoStorage/";
+
+    public static final String FILES_ABSOLUTE_PATH  = "/opt/wildfly/DocRoot/CS5704-Team3-FileStorage/FileStorage/";
+    public static final String PHOTOS_ABSOLUTE_PATH = "/opt/wildfly/DocRoot/CS5704-Team3-FileStorage/PhotoStorage/";
 
     //--------------------------------
     // To run on your AWS EC2 instance
@@ -77,14 +77,14 @@ public final class Constants {
     //---------------
     // To run locally
     //---------------
-    public static final String FILES_URI  = "http://localhost:8080/filesz/";
-    public static final String PHOTOS_URI = "http://localhost:8080/photos/";
+//    public static final String FILES_URI  = "http://localhost:8080/filesz/";
+//    public static final String PHOTOS_URI = "http://localhost:8080/photos/";
 
     //-----------------------------------------------------
     // To run on your AWS EC2 instance with your IP address
     //-----------------------------------------------------
-//    public static final String FILES_URI  = "http://54.92.194.218:8080/files/";
-//    public static final String PHOTOS_URI = "http://54.92.194.218:8080/photos/";
+    public static final String FILES_URI  = "http://18.207.92.39:8080/filesTravel/";
+    public static final String PHOTOS_URI = "http://18.207.92.39:8080/photosTravel/";
 
     /* 
     =============================================
